@@ -25,23 +25,23 @@ import logo from "../assets/logo.jpg";
 // Routes data
 const links = [
   {
-    name: "link1",
+    name: "link 1",
     path: "/",
     icon: <InfoIcon />,
   },
   {
-    name: "link2",
-    path: "/",
+    name: "link 2",
+    path: "/2",
     icon: <InfoIcon />,
   },
   {
-    name: "link3",
-    path: "/",
+    name: "link 3",
+    path: "/3",
     icon: <InfoIcon />,
   },
   {
-    name: "link4",
-    path: "/",
+    name: "link 4",
+    path: "/4",
     icon: <InfoIcon />,
   },
 ];

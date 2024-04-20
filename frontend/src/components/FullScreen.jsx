@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-const FullScreen = ({ children }) => {
+const Fullscreen = ({ children }) => {
   return (
     <Box
       component="section"
@@ -19,4 +19,4 @@ const FullScreen = ({ children }) => {
   );
 };
 
-export default FullScreen;
+export default Fullscreen;

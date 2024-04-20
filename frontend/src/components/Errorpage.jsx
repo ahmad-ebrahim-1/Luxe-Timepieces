@@ -1,10 +1,10 @@
-import FullScreen from "./FullScreen";
+import Fullscreen from "./Fullscreen";
 import { Box, Stack, Typography } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
 
-const Error = ({ msg }) => {
+const Errorpage = ({ msg }) => {
   return (
-    <FullScreen>
+    <Fullscreen>
       <Box sx={{ minHeight: "inherit", display: "grid", placeItems: "center" }}>
         <Stack
           spacing={2}
@@ -16,8 +16,8 @@ const Error = ({ msg }) => {
           </Typography>
         </Stack>
       </Box>
-    </FullScreen>
+    </Fullscreen>
   );
 };
 
-export default Error;
+export default Errorpage;
