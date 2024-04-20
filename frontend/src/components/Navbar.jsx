@@ -20,7 +20,7 @@ import { LightMode, DarkMode, ShoppingCart, Person } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import InfoIcon from "@mui/icons-material/Info";
 
-import logo from "../assets/OIG1.jpg";
+import logo from "../assets/logo.jpg";
 
 // Routes data
 const links = [
