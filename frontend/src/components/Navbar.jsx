@@ -166,6 +166,8 @@ export default function Navbar({ isDark, setIsDark }) {
       >
         <List
           sx={{
+            backgroundColor: "background.default",
+            height: "100%",
             width: { xs: "65vw", sm: "50vw" },
             paddingTop: "1rem",
           }}
