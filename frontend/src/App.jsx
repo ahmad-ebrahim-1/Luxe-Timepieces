@@ -12,23 +12,26 @@ function App() {
   const lightTheme = createTheme({
     palette: {
       mode: "light",
-      primary: {
-        main: "#053B50",
+      // primary: {
+      //   main: "",
+      // },
+      background: {
+        default: "#fdfff5",
       },
     },
     typography: {
-      fontFamily: "'Nunito', 'Lexend', 'Roboto'",
+      fontFamily: "'Outfit', 'Roboto'",
     },
   });
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
-      primary: {
-        main: "#64CCC5",
-      },
+      // primary: {
+      //   main: "",
+      // },
     },
     typography: {
-      fontFamily: "'Nunito', 'Lexend', 'Roboto'",
+      fontFamily: "'Outfit', 'Roboto'",
     },
   });
 

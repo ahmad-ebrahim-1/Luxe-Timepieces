@@ -16,7 +16,7 @@ import {
   Stack,
   Box,
 } from "@mui/material";
-import { LightMode, DarkMode } from "@mui/icons-material";
+import { LightMode, DarkMode, ShoppingCart, Person } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import InfoIcon from "@mui/icons-material/Info";
 
@@ -57,6 +57,16 @@ export default function Navbar({ isDark, setIsDark }) {
       action: () => setIsDark(!isDark),
     },
     {
+      name: "cart button",
+      icon: <ShoppingCart />,
+      action: () => {},
+    },
+    {
+      name: "user button",
+      icon: <Person />,
+      action: () => {},
+    },
+    {
       name: "menu button",
       icon: <MenuIcon />,
       action: () => setDrawerIsVisible(!drawerIsVisible),
@@ -66,7 +76,7 @@ export default function Navbar({ isDark, setIsDark }) {
   return (
     <nav>
       {/* app bar */}
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ backgroundColor: "background.default" }}>
         <Toolbar
           sx={{
             justifyContent: "space-between",
@@ -86,7 +96,14 @@ export default function Navbar({ isDark, setIsDark }) {
               alt="Logo"
               src={logo}
             />
-            <Typography variant="h6" sx={{ fontFamily: "" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "400",
+                display: { xs: "none", sm: "block" },
+                color: `${isDark ? "#fff" : "#000"}`,
+              }}
+            >
               Luxe Timepieces
             </Typography>
           </Stack>
@@ -101,7 +118,9 @@ export default function Navbar({ isDark, setIsDark }) {
                 key={link.name}
                 style={({ isActive }) => {
                   return {
-                    borderBottom: isActive ? "1px solid #FFF" : "",
+                    borderBottom: isActive
+                      ? `${isDark ? "1px solid #fff" : "1px solid #000"}`
+                      : "",
                   };
                 }}
               >
@@ -110,22 +129,22 @@ export default function Navbar({ isDark, setIsDark }) {
                   variant="text"
                   startIcon={link.icon}
                   sx={{
-                    color: "#FFF",
+                    color: `${isDark ? "#fff" : "#000"}`,
                     ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
                   }}
                 >
-                  {link.name}
+                  <Typography variant="body2">{link.name}</Typography>
                 </Button>
               </NavLink>
             ))}
           </Stack>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={1}>
             {appBarBtns.map((btn) => (
               <IconButton
                 key={btn.name}
                 aria-label={btn.name}
                 sx={{
-                  color: "#FFF",
+                  color: `${isDark ? "#fff" : "#000"}`,
                   ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
                   display: {
                     md: `${btn.name === "menu button" && "none"}`,
