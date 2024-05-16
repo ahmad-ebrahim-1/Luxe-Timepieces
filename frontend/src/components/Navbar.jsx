@@ -94,9 +94,10 @@ export default function Navbar({ isDark, setIsDark }) {
             <Box
               component="img"
               sx={{
-                height: "28px",
+                height: "38px",
                 borderRadius: "100%",
                 alignSelf: "center",
+                width: "38px",
               }}
               alt="Logo"
               src={logo}
