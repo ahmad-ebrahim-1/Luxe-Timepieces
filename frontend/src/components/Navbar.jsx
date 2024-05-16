@@ -16,38 +16,43 @@ import {
   Stack,
   Box,
 } from "@mui/material";
-import { LightMode, DarkMode, ShoppingCart, Person } from "@mui/icons-material";
+import {
+  LightMode,
+  DarkMode,
+  ShoppingCart,
+  Person,
+  Home,
+  Watch,
+  Discount,
+  Login,
+} from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import InfoIcon from "@mui/icons-material/Info";
 
 import logo from "../assets/logo.jpg";
 
 // Routes data
 const links = [
   {
-    name: "link 1",
+    name: "Home",
     path: "/",
-    icon: <InfoIcon />,
+    icon: <Home />,
   },
   {
-    name: "link 2",
-    path: "/2",
-    icon: <InfoIcon />,
+    name: "Products",
+    path: "/products",
+    icon: <Watch />,
   },
   {
-    name: "link 3",
-    path: "/3",
-    icon: <InfoIcon />,
-  },
-  {
-    name: "link 4",
-    path: "/4",
-    icon: <InfoIcon />,
+    name: "Offers",
+    path: "/offers",
+    icon: <Discount />,
   },
 ];
 
 export default function Navbar({ isDark, setIsDark }) {
   const [drawerIsVisible, setDrawerIsVisible] = useState(false);
+  const [userDrawerIsVisible, setUserDrawerIsVisible] = useState(false);
+  const [cartIsVisible, setCartIsVisible] = useState(false);
 
   // Appbar buttons
   const appBarBtns = [
@@ -59,17 +64,17 @@ export default function Navbar({ isDark, setIsDark }) {
     {
       name: "cart button",
       icon: <ShoppingCart />,
-      action: () => {},
+      action: () => setCartIsVisible(true),
     },
     {
       name: "user button",
       icon: <Person />,
-      action: () => {},
+      action: () => setUserDrawerIsVisible(true),
     },
     {
       name: "menu button",
       icon: <MenuIcon />,
-      action: () => setDrawerIsVisible(!drawerIsVisible),
+      action: () => setDrawerIsVisible(true),
     },
   ];
 
@@ -158,7 +163,7 @@ export default function Navbar({ isDark, setIsDark }) {
           </Stack>
         </Toolbar>
       </AppBar>
-      {/* drawer */}
+      {/* menu drawer */}
       <Drawer
         anchor="right"
         open={drawerIsVisible}
@@ -199,6 +204,47 @@ export default function Navbar({ isDark, setIsDark }) {
               </NavLink>
             </ListItem>
           ))}
+        </List>
+      </Drawer>
+      {/* user drawer */}
+      <Drawer
+        anchor="top"
+        open={userDrawerIsVisible}
+        onClose={() => setUserDrawerIsVisible(false)}
+      >
+        <List
+          sx={{
+            backgroundColor: "background.default",
+            height: "100%",
+            width: "100%",
+            paddingTop: "1rem",
+          }}
+        >
+          <Typography variant="h5" sx={{ padding: "1rem" }}>
+            User profile
+          </Typography>
+          <Divider />
+          <ListItem>
+            <NavLink
+              to="/login"
+              style={({ isActive }) => {
+                return {
+                  width: "fit",
+                  textDecoration: "none",
+                  color: "inherit",
+                  backgroundColor: isActive ? "rgba(0, 0, 0, .1)" : "",
+                };
+              }}
+            >
+              <ListItemButton
+                aria-label="login button"
+                onClick={() => setUserDrawerIsVisible(false)}
+              >
+                <ListItemIcon>{<Login />}</ListItemIcon>
+                <ListItemText>Login to your account</ListItemText>
+              </ListItemButton>
+            </NavLink>
+          </ListItem>
         </List>
       </Drawer>
     </nav>

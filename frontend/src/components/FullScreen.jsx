@@ -1,17 +1,19 @@
 import { Box } from "@mui/material";
 
-const Fullscreen = ({ children }) => {
+const Fullscreen = ({ children, gradientBG }) => {
   return (
     <Box
       component="section"
       sx={{
         width: "100%",
-        maxWidth: "1400px",
         minHeight: "100vh",
         paddingInline: {
           xs: "0.6rem",
           xl: "0",
         },
+        background: gradientBG
+          ? "linear-gradient(to left top, #16697A, #FFF)"
+          : "",
       }}
     >
       {children}

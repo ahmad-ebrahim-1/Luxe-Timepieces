@@ -5,6 +5,10 @@ import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import Navbar from "./components/Navbar";
 
 import Homepage from "./views/Homepage";
+import Products from "./views/Products";
+import Offers from "./views/Offers";
+import Login from "./views/Login";
+import Signup from "./views/Signup";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -12,11 +16,14 @@ function App() {
   const lightTheme = createTheme({
     palette: {
       mode: "light",
-      // primary: {
-      //   main: "",
-      // },
+      primary: {
+        main: "#16697A",
+      },
+      secondary: {
+        main: "#B7B7A4",
+      },
       background: {
-        default: "#fdfff5",
+        default: "#F0EFEB",
       },
     },
     typography: {
@@ -26,9 +33,15 @@ function App() {
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
-      // primary: {
-      //   main: "",
-      // },
+      primary: {
+        main: "#AEE6E6",
+      },
+      secondary: {
+        main: "#B7B7A4",
+      },
+      background: {
+        default: "#292929",
+      },
     },
     typography: {
       fontFamily: "'Outfit', 'Roboto'",
@@ -39,10 +52,14 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <CssBaseline />
-        <main>
+        <main style={{ display: "grid", placeItems: "center" }}>
           <Navbar isDark={isDark} setIsDark={setIsDark} />
           <Routes>
             <Route path="/" element={<Homepage />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/offers" element={<Offers />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
       </ThemeProvider>
