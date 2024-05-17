@@ -1,13 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Outfit", sans-serif !important;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+/* hero styles */
 .pattern-light {
   background-color: transparent;
-  background-image: radial-gradient(#16697a 16px, #f0efeb 1px);
-  background-size: 100px 6px;
+  background-image: radial-gradient(#16697a 12px, #f0efeb 1px);
+  background-size: 120px 6px;
   background-position: center;
   width: 100%;
   height: 100%;
@@ -15,9 +23,35 @@
 
 .pattern-dark {
   background-color: transparent;
-  background-image: radial-gradient(#aee6e6 16px, #292929 1px);
-  background-size: 100px 6px;
+  background-image: radial-gradient(#aee6e6 12px, #292929 1px);
+  background-size: 120px 6px;
   background-position: center;
   width: 100%;
   height: 100%;
+}
+
+/* logos styles */
+@keyframes slides {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.logos-slider {
+  display: flex;
+  padding: 75px 0;
+  background-color: #fff;
+  box-shadow: #fff 0px 0px 0.25em, #fff 0px 0.25em 1em;
+}
+
+.logos-slide {
+  display: flex;
+  animation: 35s slides infinite linear;
+}
+
+.logos-slider:hover .logos-slide {
+  animation-play-state: paused;
 }

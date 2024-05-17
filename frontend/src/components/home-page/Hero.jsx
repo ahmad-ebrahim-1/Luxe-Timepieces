@@ -10,8 +10,7 @@ const Hero = ({ isDark }) => {
       <Box
         component="div"
         sx={{
-          minHeight: "100%",
-          width: "100vw",
+          minHeight: "inherit",
           filter: "blur(16px)",
           zIndex: -9999,
         }}
@@ -30,7 +29,7 @@ const Hero = ({ isDark }) => {
           justifyContent: { xs: "center", md: "space-around" },
           alignItems: "center",
           gap: 4,
-          padding: { xs: 2, xl: 0 },
+          padding: { xs: 4, xl: 0 },
         }}
       >
         <Box
