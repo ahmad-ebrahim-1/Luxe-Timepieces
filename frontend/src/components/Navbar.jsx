@@ -28,7 +28,7 @@ import {
 } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import logo from "../assets/logo.jpg";
+import logo from "/public/logo.jpg";
 
 // Routes data
 const links = [
@@ -94,10 +94,10 @@ export default function Navbar({ isDark, setIsDark }) {
             <Box
               component="img"
               sx={{
-                height: "38px",
+                width: "28px",
+                height: "28px",
                 borderRadius: "100%",
                 alignSelf: "center",
-                width: "38px",
               }}
               alt="Logo"
               src={logo}

@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import Fullscreen from "../components/Fullscreen";
-
-import watchImage from "../assets/watch-hero.png";
 import { ArrowRightAlt } from "@mui/icons-material";
+
+import watchImage from "/public/hero-watch.png";
 
 const Hero = ({ isDark }) => {
   return (
