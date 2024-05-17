@@ -11,8 +11,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import FullScreen from "../components/FullScreen";
-import CustomCard from "../components/CustomCard";
+import Product from "../components/products/Product";
 
 //TMP
 import image1 from "../assets/images/watch1.jpg";
@@ -34,7 +33,7 @@ const Products = () => {
   const navigate = useNavigate();
 
   return (
-    <FullScreen>
+    <>
       <Toolbar
         sx={{
           pt: { xs: "5rem", sm: "6rem" },
@@ -84,11 +83,11 @@ const Products = () => {
       >
         {products.map((product, index) => (
           <Grid item key={index}>
-            <CustomCard product={product} />
+            <Product product={product} />
           </Grid>
         ))}
       </Grid>
-    </FullScreen>
+    </>
   );
 };
 

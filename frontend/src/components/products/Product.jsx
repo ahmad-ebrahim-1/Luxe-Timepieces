@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 
-const CustomCard = ({ product }) => {
+const Product = ({ product }) => {
   return (
     <Card variant="outlined">
       <CardMedia
@@ -42,4 +42,4 @@ const CustomCard = ({ product }) => {
   );
 };
 
-export default CustomCard;
+export default Product;

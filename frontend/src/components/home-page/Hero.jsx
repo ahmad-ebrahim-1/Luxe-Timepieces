@@ -1,17 +1,16 @@
 import { Box, Button, Typography } from "@mui/material";
 import { ArrowRightAlt } from "@mui/icons-material";
-
 import watchImage from "/hero-watch.png";
-import FullScreen from "../FullScreen";
 
 const Hero = ({ isDark }) => {
   return (
-    <FullScreen>
+    <Box component="div" sx={{ position: "relative", minHeight: "100dvh" }}>
       <Box
         component="div"
         sx={{
-          minHeight: "inherit",
           filter: "blur(16px)",
+          height: "100dvh",
+          width: "100%",
           zIndex: -9999,
         }}
         className={isDark ? "pattern-dark" : "pattern-light"}
@@ -23,13 +22,12 @@ const Hero = ({ isDark }) => {
           top: 0,
           left: 0,
           minHeight: "100%",
-          width: "100vw",
+          width: "100%",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           justifyContent: { xs: "center", md: "space-around" },
           alignItems: "center",
           gap: 4,
-          padding: { xs: 4, xl: 0 },
         }}
       >
         <Box
@@ -90,7 +88,7 @@ const Hero = ({ isDark }) => {
           src={watchImage}
         />
       </Box>
-    </FullScreen>
+    </Box>
   );
 };
 

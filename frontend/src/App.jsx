@@ -50,9 +50,7 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <CssBaseline />
-        <main
-          style={{ display: "grid", placeItems: "center", overflow: "hidden" }}
-        >
+        <main>
           <Navbar isDark={isDark} setIsDark={setIsDark} />
           <Routes>
             <Route path="/" element={<Homepage isDark={isDark} />} />
