@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import Hero from "../components/home-page/Hero";
 
 const Homepage = ({ isDark }) => {
   return (

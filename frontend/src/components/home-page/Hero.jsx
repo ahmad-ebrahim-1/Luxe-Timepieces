@@ -1,12 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
-import Fullscreen from "../components/Fullscreen";
 import { ArrowRightAlt } from "@mui/icons-material";
 
-import watchImage from "/public/hero-watch.png";
+import watchImage from "/hero-watch.png";
+import FullScreen from "../FullScreen";
 
 const Hero = ({ isDark }) => {
   return (
-    <Fullscreen>
+    <FullScreen>
       <Box
         component="div"
         sx={{
@@ -91,7 +91,7 @@ const Hero = ({ isDark }) => {
           src={watchImage}
         />
       </Box>
-    </Fullscreen>
+    </FullScreen>
   );
 };
 

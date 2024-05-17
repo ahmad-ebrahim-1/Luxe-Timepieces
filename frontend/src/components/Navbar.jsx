@@ -28,7 +28,7 @@ import {
 } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import logo from "/public/logo.jpg";
+import logo from "/logo.jpg";
 
 // Routes data
 const links = [

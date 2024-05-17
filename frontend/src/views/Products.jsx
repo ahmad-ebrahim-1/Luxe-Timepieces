@@ -13,7 +13,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import FullScreen from "../components/Fullscreen";
+import FullScreen from "../components/FullScreen";
 import CustomCard from "../components/CustomCard";
 
 //TMP

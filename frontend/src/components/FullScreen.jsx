@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-const Fullscreen = ({ children, gradientBG }) => {
+const FullScreen = ({ children, gradientBG }) => {
   return (
     <Box
       component="section"
@@ -21,4 +21,4 @@ const Fullscreen = ({ children, gradientBG }) => {
   );
 };
 
-export default Fullscreen;
+export default FullScreen;

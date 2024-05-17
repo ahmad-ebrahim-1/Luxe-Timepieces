@@ -1,17 +1,17 @@
 import { Box } from "@mui/material";
-import Fullscreen from "./Fullscreen";
+import FullScreen from "./FullScreen";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Loader = () => {
   return (
-    <Fullscreen>
+    <FullScreen>
       <Box
         component="div"
         sx={{ minHeight: "inherit", display: "grid", placeItems: "center" }}
       >
         <CircularProgress />
       </Box>
-    </Fullscreen>
+    </FullScreen>
   );
 };
 

@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Fullscreen from "../components/Fullscreen";
+import FullScreen from "../components/FullScreen";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const Login = () => {
@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   return (
-    <Fullscreen gradientBG>
+    <FullScreen gradientBG>
       <Box
         component="div"
         sx={{
@@ -142,7 +142,7 @@ const Login = () => {
           </Typography>
         </Box>
       </Box>
-    </Fullscreen>
+    </FullScreen>
   );
 };
 

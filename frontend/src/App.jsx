@@ -11,7 +11,7 @@ import Signup from "./views/Signup";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   const lightTheme = createTheme({
     palette: {
