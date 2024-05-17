@@ -1,4 +1,3 @@
-import { Favorite } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -9,23 +8,18 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { Favorite } from "@mui/icons-material";
 
 const CustomCard = ({ product }) => {
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        maxWidth: "300px",
-        marginTop: "1rem",
-      }}
-    >
+    <Card variant="outlined">
       <CardMedia
         sx={{
           height: "250px",
           width: "250px",
           aspectRatio: "3 / 4",
           objectFit: "cover",
-          margin: "20px",
+          marginBottom: "1rem",
         }}
         image={product.url}
         product={product.title}
@@ -37,7 +31,9 @@ const CustomCard = ({ product }) => {
         <Divider />
       </CardContent>
       <CardActions sx={{ justifyContent: "space-between" }}>
-        <Button aria-label="Show more">Show more</Button>
+        <Button variant="text" aria-label="Show more">
+          Show more
+        </Button>
         <IconButton aria-label="favorite button">
           <Favorite />
         </IconButton>

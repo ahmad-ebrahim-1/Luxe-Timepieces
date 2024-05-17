@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import { ArrowBack } from "@mui/icons-material";
 
-import FullScreen from "../components/FullScreen";
-import CustomCard from "../components/CustomCard";
 import {
   Typography,
   Grid,
@@ -15,18 +13,21 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import FullScreen from "../components/Fullscreen";
+import CustomCard from "../components/CustomCard";
 
+//TMP
 import image1 from "../assets/items/watch1.jpg";
 import image2 from "../assets/items/watch2.jpg";
 import image3 from "../assets/items/watch3.jpg";
 
 const products = [
-  { url: image1, title: "Galaxy" },
-  { url: image2, title: "Galaxy" },
-  { url: image3, title: "Galaxy" },
-  { url: image1, title: "Galaxy" },
-  { url: image2, title: "Galaxy" },
-  { url: image3, title: "Galaxy" },
+  { url: image1, title: "Watch" },
+  { url: image2, title: "Watch" },
+  { url: image3, title: "Watch" },
+  { url: image1, title: "Watch" },
+  { url: image2, title: "Watch" },
+  { url: image3, title: "Watch" },
 ];
 
 const Products = () => {
@@ -41,7 +42,7 @@ const Products = () => {
           pt: { xs: "5rem", sm: "6rem" },
           paddingInline: { xs: "0", sm: "16px" },
           justifyContent: "space-between",
-          alignItems: "end",
+          alignItems: "center",
         }}
       >
         <IconButton
@@ -55,7 +56,6 @@ const Products = () => {
         <Typography
           variant="h5"
           sx={{
-            fontFamily: "Lexend",
             fontSize: { xs: "1.25rem", sm: "h5.fontSize" },
           }}
         >
@@ -80,7 +80,7 @@ const Products = () => {
         container
         spacing={4}
         sx={{
-          paddingBlock: "1rem",
+          marginBlock: "1rem",
           justifyContent: "center",
         }}
       >

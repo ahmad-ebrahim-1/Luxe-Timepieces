@@ -3,3 +3,21 @@
 * {
   font-family: "Outfit", sans-serif !important;
 }
+
+.pattern-light {
+  background-color: transparent;
+  background-image: radial-gradient(#16697a 16px, #f0efeb 1px);
+  background-size: 100px 6px;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pattern-dark {
+  background-color: transparent;
+  background-image: radial-gradient(#aee6e6 16px, #292929 1px);
+  background-size: 100px 6px;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}

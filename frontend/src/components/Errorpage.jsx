@@ -1,8 +1,9 @@
-import Fullscreen from "./Fullscreen";
 import { Box, Stack, Typography } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
 
-const Errorpage = ({ msg }) => {
+import Fullscreen from "./Fullscreen";
+
+const Errorpage = ({ message }) => {
   return (
     <Fullscreen>
       <Box sx={{ minHeight: "inherit", display: "grid", placeItems: "center" }}>
@@ -11,8 +12,9 @@ const Errorpage = ({ msg }) => {
           sx={{ justifyContent: "center", alignItems: "center" }}
         >
           <ErrorIcon fontSize="large" sx={{ color: "error.main" }} />
+
           <Typography variant="h5" maxWidth="sm" textAlign="center">
-            {msg}
+            {message}
           </Typography>
         </Stack>
       </Box>

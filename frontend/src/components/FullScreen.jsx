@@ -8,8 +8,8 @@ const Fullscreen = ({ children, gradientBG }) => {
         width: "100%",
         minHeight: "100vh",
         paddingInline: {
-          xs: "0.6rem",
-          xl: "0",
+          xs: 2,
+          xl: 0,
         },
         background: gradientBG
           ? "linear-gradient(to left top, #16697A, #FFF)"

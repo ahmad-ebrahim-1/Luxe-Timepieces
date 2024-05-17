@@ -2,16 +2,16 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 
-import Navbar from "./components/Navbar";
-
 import Homepage from "./views/Homepage";
 import Products from "./views/Products";
 import Offers from "./views/Offers";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 
+import Navbar from "./components/Navbar";
+
 function App() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   const lightTheme = createTheme({
     palette: {
@@ -52,10 +52,12 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <CssBaseline />
-        <main style={{ display: "grid", placeItems: "center" }}>
+        <main
+          style={{ display: "grid", placeItems: "center", overflow: "hidden" }}
+        >
           <Navbar isDark={isDark} setIsDark={setIsDark} />
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<Homepage isDark={isDark} />} />
             <Route path="/products" element={<Products />} />
             <Route path="/offers" element={<Offers />} />
             <Route path="/login" element={<Login />} />

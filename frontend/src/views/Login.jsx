@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Fullscreen from "../components/FullScreen";
+import Fullscreen from "../components/Fullscreen";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
