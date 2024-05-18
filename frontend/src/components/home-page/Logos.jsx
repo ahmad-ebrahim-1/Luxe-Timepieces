@@ -17,6 +17,7 @@ const Logos = () => {
       <Typography
         variant="h2"
         sx={{
+          maxWidth: "900px",
           textAlign: "center",
           fontWeight: "700",
           fontSize: {
