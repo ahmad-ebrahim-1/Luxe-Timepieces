@@ -75,7 +75,7 @@ const Login = () => {
           minWidth: { xs: "100%", sm: "400px" },
           minHeight: "400px",
           padding: "2rem",
-          bgcolor: "background.default",
+          bgcolor: "secondary.main",
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
           borderRadius: 1.5,
         }}

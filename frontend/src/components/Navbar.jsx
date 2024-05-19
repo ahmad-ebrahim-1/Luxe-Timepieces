@@ -31,7 +31,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import logo from "/logo.jpg";
 
 // Routes data
-const links = [
+export const links = [
   {
     name: "Home",
     path: "/",
@@ -166,15 +166,14 @@ export default function Navbar({ isDark, setIsDark }) {
       </AppBar>
       {/* menu drawer */}
       <Drawer
-        anchor="right"
+        anchor="top"
         open={drawerIsVisible}
         onClose={() => setDrawerIsVisible(false)}
       >
         <List
           sx={{
-            backgroundColor: "background.default",
-            height: "100%",
-            width: { xs: "65vw", sm: "50vw" },
+            backgroundColor: "secondary.main",
+            width: "100%",
             paddingTop: "1rem",
           }}
         >
@@ -209,15 +208,14 @@ export default function Navbar({ isDark, setIsDark }) {
       </Drawer>
       {/* user drawer */}
       <Drawer
-        anchor="top"
+        anchor="right"
         open={userDrawerIsVisible}
         onClose={() => setUserDrawerIsVisible(false)}
       >
         <List
           sx={{
-            backgroundColor: "background.default",
+            backgroundColor: "secondary.main",
             height: "100%",
-            width: "100%",
             paddingTop: "1rem",
           }}
         >

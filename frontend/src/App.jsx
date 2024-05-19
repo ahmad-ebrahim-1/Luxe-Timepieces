@@ -7,6 +7,7 @@ import Offers from "./views/Offers";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -18,7 +19,7 @@ function App() {
         main: "#16697A",
       },
       secondary: {
-        main: "#B7B7A4",
+        main: "#DAD9D5",
       },
       background: {
         default: "#F0EFEB",
@@ -35,7 +36,7 @@ function App() {
         main: "#AEE6E6",
       },
       secondary: {
-        main: "#B7B7A4",
+        main: "#454545",
       },
       background: {
         default: "#292929",
@@ -59,6 +60,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
+          <Footer />
         </main>
       </ThemeProvider>
     </>
