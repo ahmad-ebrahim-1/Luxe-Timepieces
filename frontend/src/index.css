@@ -26,6 +26,19 @@
   height: 100%;
 }
 
+/*  */
+.mySwiper {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  color: #16697a;
+}
+
 /* logos styles */
 @keyframes slides {
   from {

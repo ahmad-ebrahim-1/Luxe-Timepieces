@@ -1,6 +1,29 @@
-import { Box, Button, Typography } from "@mui/material";
-import { ArrowRightAlt } from "@mui/icons-material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Facebook, Instagram, WhatsApp, X } from "@mui/icons-material";
 import watchImage from "/hero-watch.png";
+
+const socials = [
+  {
+    icon: <Facebook />,
+    title: "Facebook",
+    color: "#1877F2",
+  },
+  {
+    icon: <Instagram />,
+    title: "Instagram",
+    color: "#cd486b",
+  },
+  {
+    icon: <WhatsApp />,
+    title: "WhatsApp",
+    color: "#075E54",
+  },
+  {
+    icon: <X />,
+    title: "X",
+    color: "#000",
+  },
+];
 
 const Hero = ({ isDark }) => {
   return (
@@ -73,9 +96,13 @@ const Hero = ({ isDark }) => {
             make a statement with every moment.
           </Typography>
 
-          <Button variant="contained" endIcon={<ArrowRightAlt />}>
-            Show more
-          </Button>
+          <Stack direction="row" spacing={2}>
+            {socials.map((s) => (
+              <IconButton key={s.title} sx={{ ":hover": { color: s.color } }}>
+                {s.icon}
+              </IconButton>
+            ))}
+          </Stack>
         </Box>
 
         <Box
