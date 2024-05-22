@@ -29,6 +29,7 @@ const Footer = () => {
       <Stack direction="row" spacing={2} display="flex" alignItems="center">
         {links.map((link, index) => (
           <NavLink
+            key={index}
             to={link.path}
             style={({ isActive }) => {
               return {

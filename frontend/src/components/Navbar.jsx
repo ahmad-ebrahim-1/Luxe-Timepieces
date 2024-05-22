@@ -25,6 +25,7 @@ import {
   Watch,
   Discount,
   Login,
+  Favorite,
 } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -46,6 +47,11 @@ export const links = [
     name: "Offers",
     path: "/offers",
     icon: <Discount />,
+  },
+  {
+    name: "Login",
+    path: "/login",
+    icon: <Login />,
   },
 ];
 
@@ -166,14 +172,15 @@ export default function Navbar({ isDark, setIsDark }) {
       </AppBar>
       {/* menu drawer */}
       <Drawer
-        anchor="top"
+        anchor="right"
         open={drawerIsVisible}
         onClose={() => setDrawerIsVisible(false)}
       >
         <List
           sx={{
             backgroundColor: "secondary.main",
-            width: "100%",
+            height: "100%",
+            minWidth: "275px",
             paddingTop: "1rem",
           }}
         >
@@ -216,6 +223,7 @@ export default function Navbar({ isDark, setIsDark }) {
           sx={{
             backgroundColor: "secondary.main",
             height: "100%",
+            minWidth: "275px",
             paddingTop: "1rem",
           }}
         >
@@ -225,22 +233,19 @@ export default function Navbar({ isDark, setIsDark }) {
           <Divider />
           <ListItem>
             <NavLink
-              to="/login"
+              to=""
               style={({ isActive }) => {
                 return {
-                  width: "fit",
+                  width: "100%",
                   textDecoration: "none",
                   color: "inherit",
                   backgroundColor: isActive ? "rgba(0, 0, 0, .1)" : "",
                 };
               }}
             >
-              <ListItemButton
-                aria-label="login button"
-                onClick={() => setUserDrawerIsVisible(false)}
-              >
-                <ListItemIcon>{<Login />}</ListItemIcon>
-                <ListItemText>Login to your account</ListItemText>
+              <ListItemButton aria-label="favorites button">
+                <ListItemIcon>{<Favorite />}</ListItemIcon>
+                <ListItemText>Favorites</ListItemText>
               </ListItemButton>
             </NavLink>
           </ListItem>

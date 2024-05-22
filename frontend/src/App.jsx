@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import store from "./store";
+import { Provider } from "react-redux";
+
 import Homepage from "./views/Homepage";
 import Products from "./views/Products";
 import Offers from "./views/Offers";
@@ -48,7 +51,7 @@ function App() {
   });
 
   return (
-    <>
+    <Provider store={store}>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <CssBaseline />
         <main>
@@ -63,7 +66,7 @@ function App() {
           <Footer />
         </main>
       </ThemeProvider>
-    </>
+    </Provider>
   );
 }
 
