@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import UserDrawer from "./UserDrawer";
+import Cart from "./shopping-cart/ShoppingCart";
 import {
   Typography,
   AppBar,
@@ -16,6 +19,7 @@ import {
   Stack,
   Box,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   LightMode,
   DarkMode,
@@ -24,41 +28,41 @@ import {
   Home,
   Watch,
   Discount,
-  Login,
-  Favorite,
+  AccountCircle,
 } from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
 
 import logo from "/logo.jpg";
-
-// Routes data
-export const links = [
-  {
-    name: "Home",
-    path: "/",
-    icon: <Home />,
-  },
-  {
-    name: "Products",
-    path: "/products",
-    icon: <Watch />,
-  },
-  {
-    name: "Offers",
-    path: "/offers",
-    icon: <Discount />,
-  },
-  {
-    name: "Login",
-    path: "/login",
-    icon: <Login />,
-  },
-];
 
 export default function Navbar({ isDark, setIsDark }) {
   const [drawerIsVisible, setDrawerIsVisible] = useState(false);
   const [userDrawerIsVisible, setUserDrawerIsVisible] = useState(false);
   const [cartIsVisible, setCartIsVisible] = useState(false);
+
+  const { user } = useSelector((state) => state.auth);
+
+  // Routes data
+  const links = [
+    {
+      name: "Home",
+      path: "/",
+      icon: <Home />,
+    },
+    {
+      name: "Products",
+      path: "/products",
+      icon: <Watch />,
+    },
+    {
+      name: "Offers",
+      path: "/offers",
+      icon: <Discount />,
+    },
+    {
+      name: "Login",
+      path: "/login",
+      icon: <AccountCircle />,
+    },
+  ];
 
   // Appbar buttons
   const appBarBtns = [
@@ -66,27 +70,30 @@ export default function Navbar({ isDark, setIsDark }) {
       name: "theme button",
       icon: isDark ? <LightMode /> : <DarkMode />,
       action: () => setIsDark(!isDark),
+      isPrivate: false,
     },
     {
       name: "cart button",
       icon: <ShoppingCart />,
       action: () => setCartIsVisible(true),
+      isPrivate: true,
     },
     {
       name: "user button",
       icon: <Person />,
       action: () => setUserDrawerIsVisible(true),
+      isPrivate: true,
     },
     {
       name: "menu button",
       icon: <MenuIcon />,
       action: () => setDrawerIsVisible(true),
+      isPrivate: false,
     },
   ];
 
   return (
     <nav>
-      {/* app bar */}
       <AppBar position="fixed" sx={{ backgroundColor: "background.default" }}>
         <Toolbar
           sx={{
@@ -151,26 +158,29 @@ export default function Navbar({ isDark, setIsDark }) {
             ))}
           </Stack>
           <Stack direction="row" spacing={1}>
-            {appBarBtns.map((btn) => (
-              <IconButton
-                key={btn.name}
-                aria-label={btn.name}
-                sx={{
-                  color: `${isDark ? "#fff" : "#000"}`,
-                  ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
-                  display: {
-                    md: `${btn.name === "menu button" && "none"}`,
-                  },
-                }}
-                onClick={() => btn.action()}
-              >
-                {btn.icon}
-              </IconButton>
-            ))}
+            {appBarBtns.map((btn) => {
+              if (!btn.isPrivate || (btn.isPrivate && user !== null))
+                return (
+                  <IconButton
+                    key={btn.name}
+                    aria-label={btn.name}
+                    sx={{
+                      color: `${isDark ? "#fff" : "#000"}`,
+                      ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
+                      display: {
+                        md: `${btn.name === "menu button" && "none"}`,
+                      },
+                    }}
+                    onClick={() => btn.action()}
+                  >
+                    {btn.icon}
+                  </IconButton>
+                );
+            })}
           </Stack>
         </Toolbar>
       </AppBar>
-      {/* menu drawer */}
+
       <Drawer
         anchor="right"
         open={drawerIsVisible}
@@ -213,44 +223,13 @@ export default function Navbar({ isDark, setIsDark }) {
           ))}
         </List>
       </Drawer>
-      {/* user drawer */}
-      <Drawer
-        anchor="right"
-        open={userDrawerIsVisible}
-        onClose={() => setUserDrawerIsVisible(false)}
-      >
-        <List
-          sx={{
-            backgroundColor: "secondary.main",
-            height: "100%",
-            minWidth: "275px",
-            paddingTop: "1rem",
-          }}
-        >
-          <Typography variant="h5" sx={{ padding: "1rem" }}>
-            User profile
-          </Typography>
-          <Divider />
-          <ListItem>
-            <NavLink
-              to=""
-              style={({ isActive }) => {
-                return {
-                  width: "100%",
-                  textDecoration: "none",
-                  color: "inherit",
-                  backgroundColor: isActive ? "rgba(0, 0, 0, .1)" : "",
-                };
-              }}
-            >
-              <ListItemButton aria-label="favorites button">
-                <ListItemIcon>{<Favorite />}</ListItemIcon>
-                <ListItemText>Favorites</ListItemText>
-              </ListItemButton>
-            </NavLink>
-          </ListItem>
-        </List>
-      </Drawer>
+
+      <UserDrawer
+        isOpen={userDrawerIsVisible}
+        setOpen={setUserDrawerIsVisible}
+      />
+
+      <Cart isOpen={cartIsVisible} setIsOpen={setCartIsVisible} />
     </nav>
   );
 }

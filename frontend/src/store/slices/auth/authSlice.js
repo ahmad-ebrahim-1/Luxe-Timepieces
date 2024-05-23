@@ -6,13 +6,19 @@ const authSlice = createSlice({
   initialState: {
     isLoading: false,
     error: null,
-    user: {},
-    userLoggedIn: false,
+    user: null,
+    status: false,
   },
 
-  reducers: {},
+  reducers: {
+    authOperationCompleted: (state) => {
+      state.error = null;
+      state.status = false;
+    },
+  },
 
   extraReducers: (builder) => {},
 });
 
 export default authSlice.reducer;
+export const { authOperationCompleted } = authSlice.actions;

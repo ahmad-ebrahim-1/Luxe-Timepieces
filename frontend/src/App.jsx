@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
-import store from "./store";
-import { Provider } from "react-redux";
 
+import ProtectedRoute from "./components/routes/ProtectedRoute";
 import Homepage from "./views/Homepage";
 import Products from "./views/Products";
 import Offers from "./views/Offers";
@@ -51,22 +50,20 @@ function App() {
   });
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <CssBaseline />
-        <main>
-          <Navbar isDark={isDark} setIsDark={setIsDark} />
-          <Routes>
-            <Route path="/" element={<Homepage isDark={isDark} />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/offers" element={<Offers />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-          <Footer />
-        </main>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <main>
+        <Navbar isDark={isDark} setIsDark={setIsDark} />
+        <Routes>
+          <Route path="/" element={<Homepage isDark={isDark} />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/offers" element={<Offers />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+        <Footer />
+      </main>
+    </ThemeProvider>
   );
 }
 

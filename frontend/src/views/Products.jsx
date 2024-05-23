@@ -17,14 +17,13 @@ import Product from "../components/products/Product";
 import image1 from "../assets/images/watch1.jpg";
 import image2 from "../assets/images/watch2.jpg";
 import image3 from "../assets/images/watch3.jpg";
-
 export const products = [
-  { url: image1, title: "Watch" },
-  { url: image2, title: "Watch" },
-  { url: image3, title: "Watch" },
-  { url: image1, title: "Watch" },
-  { url: image2, title: "Watch" },
-  { url: image3, title: "Watch" },
+  { url: image1, title: "Watch Name" },
+  { url: image2, title: "Watch Name" },
+  { url: image3, title: "Watch Name" },
+  { url: image1, title: "Watch Name" },
+  { url: image2, title: "Watch Name" },
+  { url: image3, title: "Watch Name" },
 ];
 
 const Products = () => {
