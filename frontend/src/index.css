@@ -64,3 +64,16 @@
 .logos-slider:hover .logos-slide {
   animation-play-state: paused;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+  /* background: #; */
+  border-radius: 6px;
+}

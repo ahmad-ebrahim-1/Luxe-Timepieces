@@ -21,14 +21,14 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
-  LightMode,
-  DarkMode,
-  ShoppingCart,
-  Person,
-  Home,
-  Watch,
-  Discount,
-  AccountCircle,
+  LightModeOutlined,
+  DarkModeOutlined,
+  ShoppingCartOutlined,
+  PersonOutline,
+  HomeOutlined,
+  WatchOutlined,
+  DiscountOutlined,
+  AccountCircleOutlined,
 } from "@mui/icons-material";
 
 import logo from "/logo.jpg";
@@ -45,22 +45,22 @@ export default function Navbar({ isDark, setIsDark }) {
     {
       name: "Home",
       path: "/",
-      icon: <Home />,
+      icon: <HomeOutlined />,
     },
     {
       name: "Products",
       path: "/products",
-      icon: <Watch />,
+      icon: <WatchOutlined />,
     },
     {
       name: "Offers",
       path: "/offers",
-      icon: <Discount />,
+      icon: <DiscountOutlined />,
     },
     {
       name: "Login",
       path: "/login",
-      icon: <AccountCircle />,
+      icon: <AccountCircleOutlined />,
     },
   ];
 
@@ -68,19 +68,19 @@ export default function Navbar({ isDark, setIsDark }) {
   const appBarBtns = [
     {
       name: "theme button",
-      icon: isDark ? <LightMode /> : <DarkMode />,
+      icon: isDark ? <LightModeOutlined /> : <DarkModeOutlined />,
       action: () => setIsDark(!isDark),
       isPrivate: false,
     },
     {
       name: "cart button",
-      icon: <ShoppingCart />,
+      icon: <ShoppingCartOutlined />,
       action: () => setCartIsVisible(true),
       isPrivate: true,
     },
     {
       name: "user button",
-      icon: <Person />,
+      icon: <PersonOutline />,
       action: () => setUserDrawerIsVisible(true),
       isPrivate: true,
     },

@@ -7,7 +7,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { products } from "../../views/Products";
+import { products } from "../../utils/products";
 
 const NewArrivals = () => {
   return (

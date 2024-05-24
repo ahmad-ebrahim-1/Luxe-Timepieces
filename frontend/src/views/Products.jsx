@@ -12,19 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import Product from "../components/products/Product";
-
-//TMP
-import image1 from "../assets/images/watch1.jpg";
-import image2 from "../assets/images/watch2.jpg";
-import image3 from "../assets/images/watch3.jpg";
-export const products = [
-  { url: image1, title: "Watch Name" },
-  { url: image2, title: "Watch Name" },
-  { url: image3, title: "Watch Name" },
-  { url: image1, title: "Watch Name" },
-  { url: image2, title: "Watch Name" },
-  { url: image3, title: "Watch Name" },
-];
+import { products } from "../utils/products";
 
 const Products = () => {
   const [resultsType, setResultsType] = useState("basic");
