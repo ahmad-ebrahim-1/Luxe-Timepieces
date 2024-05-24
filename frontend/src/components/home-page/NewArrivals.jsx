@@ -38,7 +38,13 @@ const NewArrivals = () => {
         </Box>{" "}
       </Typography>
 
-      <Box component="div" sx={{ maxWidth: "100%", paddingInline: "0.6rem" }}>
+      <Box
+        component="div"
+        sx={{
+          maxWidth: "100%",
+          paddingInline: { xs: 0, sm: 0.5, md: 1, lg: 7 },
+        }}
+      >
         <Swiper
           // loop={true}
           autoplay={{
