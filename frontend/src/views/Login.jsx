@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Form, Formik } from "formik";
+import * as yup from "yup";
+import OperationAlert from "../components/operation-alert/OperationAlert";
+import { authOperationCompleted } from "../store/slices/auth/authSlice";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -8,138 +14,146 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [emailError, setEmailError] = useState("");
-  const [passError, setPassError] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
 
-  const validateFields = () => {
-    let invalid = false;
+  const { error, status, isLoading } = useSelector((state) => state.auth);
 
-    if (email.length === 0) {
-      setEmailError("Email is required");
-      invalid = true;
-    } else if (!email.match(/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-      setEmailError("Please enter a valid email");
-      invalid = true;
-    } else {
-      setEmailError("");
-      invalid = false;
-    }
+  const loginSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .required("Email is required"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password is too short - should be 8 chars minimum."),
+  });
 
-    if (password.length === 0) {
-      setPassError("Password is required");
-      invalid = true;
-    } else if (password.length < 8) {
-      setPassError("Password should be at least 8 characters");
-      invalid = true;
-    } else {
-      setPassError("");
-      invalid = false;
-    }
-
-    return invalid;
+  const initialValues = {
+    email: "",
+    password: "",
   };
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-
-    if (!validateFields()) {
-      console.log(email);
-      console.log(password);
-    }
+  const submitHandler = (values) => {
+    console.log(values);
   };
 
   return (
-    <Box
-      component="div"
-      sx={{
-        minHeight: "100dvh",
-        display: "grid",
-        placeItems: "center",
-      }}
-    >
+    <>
+      <OperationAlert
+        status={status}
+        error={error}
+        messageOnSuccess="The operation was completed successfuly"
+        messageOnError="There was an error, please try again later"
+        completedAction={authOperationCompleted}
+      />
+
       <Box
-        component="form"
+        component="div"
         sx={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          minWidth: { xs: "100%", sm: "400px" },
-          minHeight: "400px",
-          padding: "2rem",
-          bgcolor: "secondary.main",
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
-          borderRadius: 1.5,
+          minHeight: "100dvh",
+          display: "grid",
+          placeItems: "center",
         }}
       >
-        <Typography variant="h6" sx={{ textAlign: "center", mb: 3 }}>
-          Login to your account
-        </Typography>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={loginSchema}
+          onSubmit={submitHandler}
+        >
+          {(props) => (
+            <Form>
+              <Box
+                component="div"
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  minWidth: { xs: "100%", sm: "400px" },
+                  minHeight: "400px",
+                  padding: "2rem",
+                  bgcolor: "secondary.main",
+                }}
+              >
+                <Typography variant="h6" sx={{ textAlign: "center", mb: 4 }}>
+                  Login to your account
+                </Typography>
 
-        <Stack direction="column" spacing={3} sx={{}}>
-          <TextField
-            id="email"
-            label="Email"
-            variant="standard"
-            fullWidth
-            sx={{ color: "black" }}
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-            error={!!emailError}
-            helperText={emailError ? emailError : ""}
-          />
-          <TextField
-            id="password"
-            type={showPassword ? "text" : "password"}
-            label="Password"
-            variant="standard"
-            fullWidth
-            sx={{ color: "black" }}
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-            error={!!passError}
-            helperText={passError ? passError : ""}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => setShowPassword(!showPassword)}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Button
-            variant="contained"
-            type="submit"
-            fullWidth
-            onClick={handleLogin}
-          >
-            Login
-          </Button>
-        </Stack>
-        <Typography variant="subtitle2" sx={{ mt: 3, textAlign: "center" }}>
-          <span>{`Don't have an account ? `}</span>
-          <a href="/signup">Sign Up</a>
-        </Typography>
+                <Stack direction="column" spacing={3.5}>
+                  <TextField
+                    name="email"
+                    id="email"
+                    label="Email"
+                    variant="standard"
+                    fullWidth
+                    onChange={(event) => {
+                      props.values.email = event.target.value;
+                    }}
+                    error={!!props.errors.email}
+                    helperText={props.errors.email ? props.errors.email : ""}
+                  />
+                  <TextField
+                    name="password"
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    label="Password"
+                    variant="standard"
+                    fullWidth
+                    onChange={(event) => {
+                      props.values.password = event.target.value;
+                    }}
+                    error={!!props.errors.password}
+                    helperText={
+                      props.errors.password ? props.errors.password : ""
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowPassword(!showPassword)}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button variant="contained" type="submit" fullWidth>
+                    Login
+                  </Button>
+                </Stack>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    textAlign: "center",
+                    marginTop: 3.5,
+                  }}
+                >
+                  <Box component="span">{`Don't have an account? `}</Box>
+                  <NavLink to="/signup" style={{ textDecoration: "none" }}>
+                    <Box
+                      component="span"
+                      sx={{
+                        color: "primary.main",
+                        borderBottom: "1px solid",
+                      }}
+                    >
+                      Sign Up
+                    </Box>
+                  </NavLink>
+                </Typography>
+              </Box>
+            </Form>
+          )}
+        </Formik>
       </Box>
-    </Box>
+    </>
   );
 };
 

@@ -1,7 +1,25 @@
 import { Copyright } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
-import { links } from "./Navbar";
 import { NavLink } from "react-router-dom";
+
+const links = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Products",
+    path: "/products",
+  },
+  {
+    name: "Offers",
+    path: "/offers",
+  },
+  {
+    name: "Login",
+    path: "/login",
+  },
+];
 
 const Footer = () => {
   return (
@@ -29,6 +47,7 @@ const Footer = () => {
       <Stack direction="row" spacing={2} display="flex" alignItems="center">
         {links.map((link, index) => (
           <NavLink
+            key={index}
             to={link.path}
             style={({ isActive }) => {
               return {

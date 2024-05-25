@@ -69,7 +69,7 @@ const Hero = ({ isDark }) => {
               fontWeight: "700",
               fontSize: {
                 xs: "h5.fontSize",
-                sm: "h3.fontSize",
+                md: "h3.fontSize",
               },
             }}
           >

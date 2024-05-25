@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../store/slices/cart/cartSlice";
 import {
   Box,
   Button,
@@ -8,9 +11,28 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { Favorite, ShoppingCart } from "@mui/icons-material";
+import { Check, Favorite, ShoppingCartOutlined } from "@mui/icons-material";
 
 const Product = ({ product }) => {
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    const checkIfAddedToCart = () => {
+      let added = items.find((item) => item.id === product.id);
+
+      if (added) {
+        setAddedToCart(true);
+      } else {
+        setAddedToCart(false);
+      }
+    };
+
+    checkIfAddedToCart();
+  }, [items]);
+
   return (
     <Card variant="outlined">
       <CardMedia
@@ -23,7 +45,7 @@ const Product = ({ product }) => {
           marginBottom: "1rem",
         }}
         image={product.url}
-        product={product.title}
+        title={product.title}
       />
       <CardContent
         sx={{
@@ -34,7 +56,7 @@ const Product = ({ product }) => {
         }}
       >
         <Typography variant="subtitle1">{product.title}</Typography>
-        <Typography variant="subtitle2">$ 100</Typography>
+        <Typography variant="subtitle2">$ {product.price}</Typography>
       </CardContent>
       <CardActions
         sx={{
@@ -61,11 +83,13 @@ const Product = ({ product }) => {
         </Box>
         <Button
           variant="outlined"
-          endIcon={<ShoppingCart />}
+          endIcon={addedToCart ? <Check /> : <ShoppingCartOutlined />}
+          disabled={addedToCart}
           fullWidth
           sx={{ margin: "0 !important" }}
+          onClick={() => dispatch(addToCart(product))}
         >
-          Add to cart
+          {addedToCart ? "Added" : "Add to cart"}
         </Button>
       </CardActions>
     </Card>
