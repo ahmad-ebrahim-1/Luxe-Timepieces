@@ -7,10 +7,6 @@
   font-family: "Outfit", sans-serif !important;
 }
 
-body {
-  overflow-x: hidden;
-}
-
 /* hero styles */
 .pattern-light {
   background-color: transparent;
@@ -28,6 +24,19 @@ body {
   background-position: center;
   width: 100%;
   height: 100%;
+}
+
+/*  */
+.mySwiper {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  color: #16697a;
 }
 
 /* logos styles */

@@ -1,17 +1,39 @@
-import { Box, Button, Typography } from "@mui/material";
-import { ArrowRightAlt } from "@mui/icons-material";
-
+import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Facebook, Instagram, WhatsApp, X } from "@mui/icons-material";
 import watchImage from "/hero-watch.png";
-import FullScreen from "../FullScreen";
+
+const socials = [
+  {
+    icon: <Facebook />,
+    title: "Facebook",
+    color: "#1877F2",
+  },
+  {
+    icon: <Instagram />,
+    title: "Instagram",
+    color: "#cd486b",
+  },
+  {
+    icon: <WhatsApp />,
+    title: "WhatsApp",
+    color: "#075E54",
+  },
+  {
+    icon: <X />,
+    title: "X",
+    color: "#000",
+  },
+];
 
 const Hero = ({ isDark }) => {
   return (
-    <FullScreen>
+    <Box component="div" sx={{ position: "relative", minHeight: "100dvh" }}>
       <Box
         component="div"
         sx={{
-          minHeight: "inherit",
           filter: "blur(16px)",
+          height: "100dvh",
+          width: "100%",
           zIndex: -9999,
         }}
         className={isDark ? "pattern-dark" : "pattern-light"}
@@ -23,13 +45,12 @@ const Hero = ({ isDark }) => {
           top: 0,
           left: 0,
           minHeight: "100%",
-          width: "100vw",
+          width: "100%",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           justifyContent: { xs: "center", md: "space-around" },
           alignItems: "center",
           gap: 4,
-          padding: { xs: 4, xl: 0 },
         }}
       >
         <Box
@@ -75,9 +96,13 @@ const Hero = ({ isDark }) => {
             make a statement with every moment.
           </Typography>
 
-          <Button variant="contained" endIcon={<ArrowRightAlt />}>
-            Show more
-          </Button>
+          <Stack direction="row" spacing={2}>
+            {socials.map((s) => (
+              <IconButton key={s.title} sx={{ ":hover": { color: s.color } }}>
+                {s.icon}
+              </IconButton>
+            ))}
+          </Stack>
         </Box>
 
         <Box
@@ -90,7 +115,7 @@ const Hero = ({ isDark }) => {
           src={watchImage}
         />
       </Box>
-    </FullScreen>
+    </Box>
   );
 };
 

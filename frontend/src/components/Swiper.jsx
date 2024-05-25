@@ -8,6 +8,7 @@ const Swiper = ({ slides }) => {
         {slides.map((slide) => (
           <Box
             component="img"
+            key={slide.title}
             src={slide.url}
             alt={slide.title}
             sx={{ height: "75px", margin: "0 75px" }}
@@ -18,6 +19,7 @@ const Swiper = ({ slides }) => {
         {slides.map((slide) => (
           <Box
             component="img"
+            key={slide.title}
             src={slide.url}
             alt={slide.title}
             sx={{ height: "75px", margin: "0 75px" }}
