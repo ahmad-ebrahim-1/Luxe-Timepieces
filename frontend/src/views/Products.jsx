@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import {
@@ -12,12 +12,23 @@ import {
   MenuItem,
 } from "@mui/material";
 import Product from "../components/products/Product";
-import { products } from "../utils/products";
+// import { products } from "../utils/products";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../store/slices/products/productsSlice";
 
 const Products = () => {
   const [resultsType, setResultsType] = useState("basic");
-
   const navigate = useNavigate();
+
+  const { error, isLoading, products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  if (error) console.log(error);
+  console.log(products);
 
   return (
     <>
