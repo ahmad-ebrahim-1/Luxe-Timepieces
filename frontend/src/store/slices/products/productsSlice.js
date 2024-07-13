@@ -12,7 +12,7 @@ export const getProducts = createAsyncThunk(
       if (res.status === 200) {
         console.log("SUCCESS, products fetched.");
         return {
-          data: res.data.data,
+          data: res.data,
         };
       }
     } catch (error) {
