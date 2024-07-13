@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
@@ -14,14 +14,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { error, status, isLoading } = useSelector((state) => state.auth);
+  const { error, status, isLoading, user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const loginSchema = yup.object().shape({
     email: yup
@@ -42,6 +44,10 @@ const Login = () => {
   const submitHandler = (values) => {
     dispatch(login({ email: values.email, password: values.password }));
   };
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   return (
     <>
