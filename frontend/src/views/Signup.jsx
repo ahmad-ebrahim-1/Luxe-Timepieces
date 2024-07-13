@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import OperationAlert from "../components/operation-alert/OperationAlert";
-import { authOperationCompleted } from "../store/slices/auth/authSlice";
+import {
+  authOperationCompleted,
+  register,
+} from "../store/slices/auth/authSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
@@ -19,6 +22,8 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { error, status, isLoading } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
 
   const loginSchema = yup.object().shape({
     first_name: yup.string().required("First name is required"),
@@ -50,7 +55,14 @@ const Signup = () => {
 
   const submitHandler = (values) => {
     delete values["confirm_password"];
-    console.log(values);
+    dispatch(
+      register({
+        first_name: values.first_name,
+        last_name: values.last_name,
+        email: values.email,
+        password: values.password,
+      })
+    );
   };
 
   return (

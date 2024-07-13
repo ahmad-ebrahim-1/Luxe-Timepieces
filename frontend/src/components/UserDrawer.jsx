@@ -12,8 +12,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const UserDrawer = ({ isOpen, setOpen }) => {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Drawer anchor="right" open={isOpen} onClose={() => setOpen(false)}>
       <List
@@ -26,7 +29,9 @@ const UserDrawer = ({ isOpen, setOpen }) => {
       >
         <Stack direction="row" spacing={2} alignItems="center" padding={2}>
           <Avatar src="" alt="user profile image" />
-          <Typography variant="subtitle1">Ahmad Ebrahim</Typography>
+          <Typography variant="subtitle1">
+            {user && `${user.first_name} ${user.last_name}`}
+          </Typography>
         </Stack>
         <Divider />
         <ListItem>

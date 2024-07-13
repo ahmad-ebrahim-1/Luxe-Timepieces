@@ -27,7 +27,6 @@ import {
   PersonOutline,
   HomeOutlined,
   WatchOutlined,
-  DiscountOutlined,
   AccountCircleOutlined,
 } from "@mui/icons-material";
 
@@ -51,11 +50,6 @@ export default function Navbar({ isDark, setIsDark }) {
       name: "Products",
       path: "/products",
       icon: <WatchOutlined />,
-    },
-    {
-      name: "Offers",
-      path: "/offers",
-      icon: <DiscountOutlined />,
     },
     {
       name: "Login",
@@ -91,6 +85,8 @@ export default function Navbar({ isDark, setIsDark }) {
       isPrivate: false,
     },
   ];
+
+  console.log(user);
 
   return (
     <nav>
