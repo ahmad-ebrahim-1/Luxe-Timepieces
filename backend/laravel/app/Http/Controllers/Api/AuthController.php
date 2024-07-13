@@ -17,20 +17,24 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
+    {   
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string|max:255',
+            'first_name'      => 'required|string|max:255',
+            'last_name'      => 'required|string|max:255',
             'email'     => 'required|string|max:255|unique:users',
             'password'  => 'required|string'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
+        }
             $user = User::create([
-                'name'      => $request->name,
+                'first_name'      => $request->first_name,
+                'last_name'      => $request->last_name,
                 'email'     => $request->email,
                 'password'  => Hash::make($request->password)
             ]);
+
 
             $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json([
@@ -38,7 +42,7 @@ class AuthController extends Controller
                 'access_token'  => $token,
                 'token_type'    => 'Bearer'
             ]);
-        }
+        
     }
     public function login(Request $request)
     {
