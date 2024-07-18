@@ -11,6 +11,7 @@ Route::controller(ProductController::class)->group(
         Route::get('/products', 'index');
          Route::get('/products/{id}', 'show');
          Route::post('/products', 'store');
+        Route::post('products/{id}/favorite', [ProductController::class, 'addToFavorites']);
     }
 );
 Route::post('/register', [AuthController::class, 'register']);

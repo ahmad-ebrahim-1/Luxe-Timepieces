@@ -13,21 +13,30 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-     DB::create(
-    [
-            'name' => 'Luxurious Watch',
-            'slug' => 'luxurios-watch',
-            
-        ]);
-           DB::table('products')->insert([
-            'title' => 'Example Product',
-            'brand' => 'Example Brand',
-            'description' => 'This is an example product description.',
-            'image_name' => 'example_image.jpg',
-            'price' => '99.99',
-            'sale_price' => '79.99',
-            'created_at' => now(),
-            'updated_at' => now(),
-           ]);
-    }
-}
+
+        
+
+        DB::table('products')->insert([
+            [
+                'id' => 1,
+                'title' => 'Luxury Watch',
+                'brand' => 'Rolex',
+                'description' => 'A luxurious Rolex watch.',
+                'image_name' => 'rolex.jpg',
+                'price' => 9999.99,
+                'sale_price' => 8999.99,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [   'id'=> 2,
+                'title' => 'Sport Watch',
+                'brand' => 'Omega',
+                'description' => 'A high-performance Omega sport watch.',
+                'image_name' => 'omega.jpg',
+                'price' => 4999.99,
+                'sale_price' => 4499.99,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],]);
+        }
+        }
