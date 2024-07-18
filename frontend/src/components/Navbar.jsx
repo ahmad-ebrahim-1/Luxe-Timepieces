@@ -27,7 +27,6 @@ import {
   PersonOutline,
   HomeOutlined,
   WatchOutlined,
-  DiscountOutlined,
   AccountCircleOutlined,
 } from "@mui/icons-material";
 
@@ -46,21 +45,19 @@ export default function Navbar({ isDark, setIsDark }) {
       name: "Home",
       path: "/",
       icon: <HomeOutlined />,
+      isPrivate: false,
     },
     {
       name: "Products",
       path: "/products",
       icon: <WatchOutlined />,
-    },
-    {
-      name: "Offers",
-      path: "/offers",
-      icon: <DiscountOutlined />,
+      isPrivate: false,
     },
     {
       name: "Login",
       path: "/login",
       icon: <AccountCircleOutlined />,
+      isPrivate: true,
     },
   ];
 
@@ -91,6 +88,8 @@ export default function Navbar({ isDark, setIsDark }) {
       isPrivate: false,
     },
   ];
+
+  console.log(user);
 
   return (
     <nav>
@@ -131,31 +130,34 @@ export default function Navbar({ isDark, setIsDark }) {
             spacing={4}
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            {links.map((link) => (
-              <NavLink
-                to={link.path}
-                key={link.name}
-                style={({ isActive }) => {
-                  return {
-                    borderBottom: isActive
-                      ? `${isDark ? "1px solid #fff" : "1px solid #000"}`
-                      : "",
-                  };
-                }}
-              >
-                <Button
-                  aria-label={link.name}
-                  variant="text"
-                  startIcon={link.icon}
-                  sx={{
-                    color: `${isDark ? "#fff" : "#000"}`,
-                    ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
-                  }}
-                >
-                  <Typography variant="body2">{link.name}</Typography>
-                </Button>
-              </NavLink>
-            ))}
+            {links.map((link) => {
+              if (!link.isPrivate || (link.isPrivate && user === null))
+                return (
+                  <NavLink
+                    to={link.path}
+                    key={link.name}
+                    style={({ isActive }) => {
+                      return {
+                        borderBottom: isActive
+                          ? `${isDark ? "1px solid #fff" : "1px solid #000"}`
+                          : "",
+                      };
+                    }}
+                  >
+                    <Button
+                      aria-label={link.name}
+                      variant="text"
+                      startIcon={link.icon}
+                      sx={{
+                        color: `${isDark ? "#fff" : "#000"}`,
+                        ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
+                      }}
+                    >
+                      <Typography variant="body2">{link.name}</Typography>
+                    </Button>
+                  </NavLink>
+                );
+            })}
           </Stack>
           <Stack direction="row" spacing={1}>
             {appBarBtns.map((btn) => {

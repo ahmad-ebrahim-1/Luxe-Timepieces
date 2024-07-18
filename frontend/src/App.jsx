@@ -5,7 +5,6 @@ import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import Homepage from "./views/Homepage";
 import Products from "./views/Products";
-import Offers from "./views/Offers";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Navbar from "./components/Navbar";
@@ -57,7 +56,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage isDark={isDark} />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/offers" element={<Offers />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
