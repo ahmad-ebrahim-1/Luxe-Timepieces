@@ -39,14 +39,10 @@ class FavoriteController extends Controller
             return response()->json(['message' => 'Product added to favorites'], 201);
         }
     }
-    public function getFavorites($userId)
+    public function getFavorites()
     {
-        // Ensure the authenticated user matches the requested user ID
-        if (Auth::id() !== (int) $userId) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
-        $favorites = Favourite::where('user_id', $userId)
+      
+        $favorites = Favourite::where('user_id', Auth::id())
             ->with('product')
             ->get()
             ->map(function ($favorite) {

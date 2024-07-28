@@ -26,8 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('products/favorite/{user_id}', [FavoriteController::class, 'toggleFavorite']);
-    Route::get('users/{userId}/favorites', [FavoriteController::class, 'getFavorites']);
+    Route::post('products/favorite/{productId}', [FavoriteController::class, 'toggleFavorite']);
+    Route::get('users/favorites', [FavoriteController::class, 'getFavorites']);
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/{productId}/basket', [BasketController::class, 'addToBasket']);

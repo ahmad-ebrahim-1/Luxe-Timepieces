@@ -24,7 +24,7 @@ class BasketController extends Controller
         $basketItem = Basket::create([
             'user_id' => $user->id,
             'product_id' => $productId,
-        ]);
+            'quantity' => 1        ]);
 
         return response()->json(['message' => 'Product added to basket', 'basketItem' => $basketItem], 201);
     }

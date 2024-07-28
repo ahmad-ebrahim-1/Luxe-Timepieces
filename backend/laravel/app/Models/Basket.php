@@ -10,7 +10,7 @@ class Basket extends Model
     use HasFactory;
     // app/Models/Basket.php
 
-    protected $fillable = ['user_id', 'product_id'];
+    protected $fillable = ['user_id', 'product_id','quantity'];
 
     public function user()
     {
