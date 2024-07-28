@@ -33,9 +33,6 @@ class FavoriteController extends Controller
 
             Favourite::create([
                 'user_id' => $user->id,
-            if (!$user) {
-                return response()->json(['message' => 'Unauthorized'], 401);
-            }
                 'product_id' => $productId,
             ]);
 
