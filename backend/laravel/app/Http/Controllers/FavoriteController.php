@@ -22,7 +22,7 @@ class FavoriteController extends Controller
         if ($favorite) {
             // If the favorite exists, delete it
             $favorite->delete();
-            return response()->json(['message' => 'Product removed from favorites'], 200);
+            return response()->json(['message' => 'Product removed from favorite'], 200);
         } else {
             // If the favorite does not exist, create it
             $product = Product::find($productId);
@@ -36,7 +36,7 @@ class FavoriteController extends Controller
                 'product_id' => $productId,
             ]);
 
-            return response()->json(['message' => 'Product added to favorites'], 201);
+            return response()->json(['message' => 'Product added to favorite'], 201);
         }
     }
     public function getFavorites()

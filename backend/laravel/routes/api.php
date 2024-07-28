@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Api\AuthController;
@@ -15,6 +15,10 @@ Route::controller(ProductController::class)->group(
          Route::post('/products', 'store');
     }
 );
+
+
+Route::middleware('auth:api')->get('/user', [UserController::class, 'getUser']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
