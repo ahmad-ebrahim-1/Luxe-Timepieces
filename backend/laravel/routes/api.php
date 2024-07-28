@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\BasketController;
 use Illuminate\Http\Request;
 
 
@@ -26,4 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/favorite/{user_id}', [FavoriteController::class, 'toggleFavorite']);
+    Route::get('users/{userId}/favorites', [FavoriteController::class, 'getFavorites']);
+});
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('products/{productId}/basket', [BasketController::class, 'addToBasket']);
 });
