@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
-import OperationAlert from "../components/operation-alert/OperationAlert";
-import {
-  authOperationCompleted,
-  register,
-} from "../store/slices/auth/authSlice";
+import { register } from "../store/slices/auth/authSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
@@ -22,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { error, status, isLoading, user } = useSelector((state) => state.auth);
+  const { isLoading, user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -74,14 +70,6 @@ const Signup = () => {
 
   return (
     <>
-      <OperationAlert
-        status={status}
-        error={error}
-        messageOnSuccess="The operation was completed successfuly"
-        messageOnError="There was an error, please try again later"
-        completedAction={authOperationCompleted}
-      />
-
       <Box
         component="div"
         sx={{
@@ -214,7 +202,7 @@ const Signup = () => {
                     }}
                   />
                   <Button variant="contained" type="submit" fullWidth>
-                    Register
+                    {isLoading ? "Loading..." : "Register"}
                   </Button>
                 </Stack>
               </Box>

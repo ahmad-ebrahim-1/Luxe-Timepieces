@@ -12,10 +12,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/slices/auth/authSlice";
 
 const UserDrawer = ({ isOpen, setOpen }) => {
   const { user } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
 
   return (
     <Drawer anchor="right" open={isOpen} onClose={() => setOpen(false)}>
@@ -53,7 +56,12 @@ const UserDrawer = ({ isOpen, setOpen }) => {
           </NavLink>
         </ListItem>
         <ListItem>
-          <ListItemButton aria-label="logout button">
+          <ListItemButton
+            aria-label="logout button"
+            onClick={() => {
+              dispatch(logout());
+            }}
+          >
             <ListItemIcon>{<Logout />}</ListItemIcon>
             <ListItemText>Logout</ListItemText>
           </ListItemButton>

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
-import OperationAlert from "../components/operation-alert/OperationAlert";
-import { authOperationCompleted, login } from "../store/slices/auth/authSlice";
+import { login } from "../store/slices/auth/authSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
@@ -19,7 +18,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { error, status, isLoading, user } = useSelector((state) => state.auth);
+  const { isLoading, user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -51,14 +50,6 @@ const Login = () => {
 
   return (
     <>
-      <OperationAlert
-        status={status}
-        error={error}
-        messageOnSuccess="The operation was completed successfuly"
-        messageOnError="There was an error, please try again later"
-        completedAction={authOperationCompleted}
-      />
-
       <Box
         component="div"
         sx={{
@@ -133,7 +124,7 @@ const Login = () => {
                     }}
                   />
                   <Button variant="contained" type="submit" fullWidth>
-                    Login
+                    {isLoading ? "Loading..." : "Login"}
                   </Button>
                 </Stack>
                 <Typography

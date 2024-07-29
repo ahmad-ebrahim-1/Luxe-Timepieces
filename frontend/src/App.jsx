@@ -1,17 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import {
+  getAuthenticatedUser,
+  authOperationCompleted,
+} from "./store/slices/auth/authSlice";
+import { getFavorites } from "./store/slices/products/productsSlice";
+import Cookies from "universal-cookie";
 
-import ProtectedRoute from "./components/routes/ProtectedRoute";
 import Homepage from "./views/Homepage";
 import Products from "./views/Products";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Favs from "./views/Favs";
+import OperationAlert from "./components/operation-alert/OperationAlert";
+import ProtectedRoute from "./components/routes/ProtectedRoute";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
+
+  const { user, error, status, message } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const cookie = new Cookies();
+  const token = cookie.get("access_token");
+
+  useEffect(() => {
+    if (!user && token) {
+      dispatch(getAuthenticatedUser());
+    }
+  }, [user, token]);
+
+  useEffect(() => {
+    if (token) getFavorites();
+  }, [dispatch]);
 
   const lightTheme = createTheme({
     palette: {
@@ -52,12 +77,21 @@ function App() {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <CssBaseline />
       <main>
+        <OperationAlert
+          status={status}
+          error={error}
+          messageOnSuccess={message}
+          messageOnError={message}
+          completedAction={authOperationCompleted}
+        />
+
         <Navbar isDark={isDark} setIsDark={setIsDark} />
         <Routes>
           <Route path="/" element={<Homepage isDark={isDark} />} />
           <Route path="/products" element={<Products />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/favorites" element={<Favs />} />
         </Routes>
         <Footer />
       </main>

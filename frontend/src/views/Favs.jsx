@@ -1,37 +1,27 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowBack } from "@mui/icons-material";
+import { Typography, Grid, Toolbar, IconButton } from "@mui/material";
+import Product from "../components/products/Product";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  getProducts,
+  getFavorites,
   productOperationCompleted,
 } from "../store/slices/products/productsSlice";
-import { ArrowBack } from "@mui/icons-material";
-import {
-  Typography,
-  Grid,
-  Toolbar,
-  IconButton,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import Product from "../components/products/Product";
 import Loader from "../components/Loader";
 import Errorpage from "../components/Errorpage";
 import OperationAlert from "../components/operation-alert/OperationAlert";
 
-const Products = () => {
-  const [resultsType, setResultsType] = useState("basic");
+const Favs = () => {
   const navigate = useNavigate();
 
-  const { error, isLoading, products, status, operationError } = useSelector(
+  const { error, isLoading, favs, status, operationError } = useSelector(
     (state) => state.products
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getFavorites());
   }, [dispatch]);
 
   if (isLoading) return <Loader />;
@@ -70,21 +60,8 @@ const Products = () => {
             fontSize: { xs: "1.25rem", sm: "h5.fontSize" },
           }}
         >
-          Featured Products
+          Your Favorites
         </Typography>
-        <FormControl variant="standard" sx={{ minWidth: { xs: 100, sm: 120 } }}>
-          <InputLabel id="filtring-select">type</InputLabel>
-          <Select
-            labelId="filtring-select"
-            id="type-filtring-select"
-            variant="standard"
-            value={resultsType}
-            onChange={(e) => setResultsType(e.target.value)}
-          >
-            <MenuItem value="basic">Basic</MenuItem>
-            <MenuItem value="smart">Smart</MenuItem>
-          </Select>
-        </FormControl>
       </Toolbar>
 
       <Grid
@@ -95,7 +72,7 @@ const Products = () => {
           justifyContent: "center",
         }}
       >
-        {products.map((product, index) => (
+        {favs.map((product, index) => (
           <Grid item key={index}>
             <Product product={product} />
           </Grid>
@@ -105,4 +82,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Favs;

@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { removeItem, updateQuantity } from "../../store/slices/cart/cartSlice";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { Add, Close, Remove } from "@mui/icons-material";
 
@@ -55,18 +54,10 @@ const CartItem = ({ item }) => {
           {item.quantity}
         </Typography>
         <Stack direction="column">
-          <IconButton
-            onClick={() => dispatch(updateQuantity({ id: item.id, amount: 1 }))}
-            sx={{ p: 0.5 }}
-          >
+          <IconButton onClick={() => {}} sx={{ p: 0.5 }}>
             <Add fontSize="small" />
           </IconButton>
-          <IconButton
-            onClick={() =>
-              dispatch(updateQuantity({ id: item.id, amount: -1 }))
-            }
-            sx={{ p: 0.5 }}
-          >
+          <IconButton onClick={() => {}} sx={{ p: 0.5 }}>
             <Remove fontSize="small" />
           </IconButton>
         </Stack>
@@ -79,7 +70,7 @@ const CartItem = ({ item }) => {
         $ {item.finalPrice}
       </Typography>
 
-      <IconButton onClick={() => dispatch(removeItem(item.id))}>
+      <IconButton onClick={() => {}}>
         <Close fontSize="small" />
       </IconButton>
     </Box>

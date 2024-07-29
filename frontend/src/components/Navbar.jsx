@@ -89,8 +89,6 @@ export default function Navbar({ isDark, setIsDark }) {
     },
   ];
 
-  console.log(user);
-
   return (
     <nav>
       <AppBar position="fixed" sx={{ backgroundColor: "background.default" }}>
@@ -200,29 +198,32 @@ export default function Navbar({ isDark, setIsDark }) {
             Menu
           </Typography>
           <Divider />
-          {links.map((link) => (
-            <ListItem key={link.name}>
-              <NavLink
-                to={link.path}
-                style={({ isActive }) => {
-                  return {
-                    width: "100%",
-                    textDecoration: "none",
-                    color: "inherit",
-                    backgroundColor: isActive ? "rgba(0, 0, 0, .1)" : "",
-                  };
-                }}
-              >
-                <ListItemButton
-                  aria-label={link.name}
-                  onClick={() => setDrawerIsVisible(false)}
-                >
-                  <ListItemIcon>{link.icon}</ListItemIcon>
-                  <ListItemText>{link.name.toUpperCase()}</ListItemText>
-                </ListItemButton>
-              </NavLink>
-            </ListItem>
-          ))}
+          {links.map((link) => {
+            if (!link.isPrivate || (link.isPrivate && user === null))
+              return (
+                <ListItem key={link.name}>
+                  <NavLink
+                    to={link.path}
+                    style={({ isActive }) => {
+                      return {
+                        width: "100%",
+                        textDecoration: "none",
+                        color: "inherit",
+                        backgroundColor: isActive ? "rgba(0, 0, 0, .1)" : "",
+                      };
+                    }}
+                  >
+                    <ListItemButton
+                      aria-label={link.name}
+                      onClick={() => setDrawerIsVisible(false)}
+                    >
+                      <ListItemIcon>{link.icon}</ListItemIcon>
+                      <ListItemText>{link.name.toUpperCase()}</ListItemText>
+                    </ListItemButton>
+                  </NavLink>
+                </ListItem>
+              );
+          })}
         </List>
       </Drawer>
 

@@ -8,7 +8,7 @@ const BASE_URL = "http://127.0.0.1:8000/api";
 
 export default axios.create({
   baseURL: BASE_URL,
-  // headers: {
-  //   Authorization: `Bearer ${token}`,
-  // },
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
 });

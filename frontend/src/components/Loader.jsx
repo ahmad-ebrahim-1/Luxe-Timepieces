@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <Box
       component="div"
-      sx={{ minHeight: "inherit", display: "grid", placeItems: "center" }}
+      sx={{ minHeight: "100dvh", display: "grid", placeItems: "center" }}
     >
       <CircularProgress />
     </Box>
