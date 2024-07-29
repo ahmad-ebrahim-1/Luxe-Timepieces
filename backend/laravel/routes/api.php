@@ -36,4 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/{productId}/basket', [BasketController::class, 'addToBasket']);
     Route::get('users/Basket', [BasketController::class, 'getItems']);
+    Route::delete('/basket/{basketId}', [BasketController::class, 'removeFromBasket']);
+    Route::patch('/basket/increase/{basketId}', [BasketController::class, 'increaseQuantity']);
+    Route::patch('/basket/decrease/{basketId}', [BasketController::class, 'decreaseQuantity']);
 });
