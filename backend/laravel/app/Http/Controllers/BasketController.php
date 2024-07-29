@@ -21,6 +21,15 @@ class BasketController extends Controller
             return response()->json(['message' => 'Product not found'], 404);
         }
 
+        $basketItem = Basket::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($basketItem) {
+            // Item already exists in the basket
+            return response()->json(['message' => 'Product already in basket'], 400);
+        }
+
         $basketItem = Basket::create([
             'user_id' => $user->id,
             'product_id' => $productId,
