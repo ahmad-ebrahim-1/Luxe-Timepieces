@@ -1,15 +1,27 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
-import Product from "../products/Product";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../store/slices/products/productsSlice";
 
+import OperationAlert from "../operation-alert/OperationAlert";
+import Product from "../products/Product";
+import { Error } from "@mui/icons-material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import "swiper/css";
 import "swiper/css/navigation";
-
-import { products } from "../../utils/products";
+import { cartOperationCompleted } from "../../store/slices/cart/cartSlice";
 
 const NewArrivals = () => {
+  const { products, isLoading, error } = useSelector((state) => state.products);
+  const { status: cartStatus, operationError: cartOperationError } =
+    useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
   return (
     <Box
       sx={{
@@ -20,6 +32,14 @@ const NewArrivals = () => {
         alignItems: "center",
       }}
     >
+      <OperationAlert
+        status={cartStatus}
+        error={cartOperationError}
+        messageOnSuccess="The operation was completed successfuly"
+        messageOnError="There was an error, please try again later"
+        completedAction={cartOperationCompleted}
+      />
+
       <Typography
         variant="h2"
         sx={{
@@ -45,41 +65,55 @@ const NewArrivals = () => {
           paddingInline: { xs: 0, sm: 0.5, md: 1, lg: 7 },
         }}
       >
-        <Swiper
-          // loop={true}
-          autoplay={{
-            delay: 2500,
-            pauseOnMouseEnter: true,
-            disableOnInteraction: false,
-          }}
-          breakpoints={{
-            0: {
-              spaceBetween: 0,
-              slidesPerView: 1,
-            },
-            600: {
-              spaceBetween: 20,
-              slidesPerView: 2,
-            },
-            900: {
-              spaceBetween: 30,
-              slidesPerView: 3,
-            },
-            1200: {
-              spaceBetween: 40,
-              slidesPerView: 4,
-            },
-          }}
-          navigation={true}
-          modules={[Navigation, Autoplay]}
-          className="mySwiper"
-        >
-          {products.map((p, index) => (
-            <SwiperSlide key={index}>
-              <Product product={p} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {isLoading ? (
+          <CircularProgress />
+        ) : error ? (
+          <Box component="div" sx={{ textAlign: "center" }}>
+            <Error />
+            <Typography variant="h6">
+              Oops! There was an error fetching the products
+            </Typography>
+            <Typography variant="h6" sx={{ mt: 1.6 }}>
+              Please try again later...
+            </Typography>
+          </Box>
+        ) : (
+          <Swiper
+            // loop={true}
+            autoplay={{
+              delay: 2500,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              0: {
+                spaceBetween: 0,
+                slidesPerView: 1,
+              },
+              600: {
+                spaceBetween: 20,
+                slidesPerView: 2,
+              },
+              900: {
+                spaceBetween: 30,
+                slidesPerView: 3,
+              },
+              1200: {
+                spaceBetween: 40,
+                slidesPerView: 4,
+              },
+            }}
+            navigation={true}
+            modules={[Navigation, Autoplay]}
+            className="mySwiper"
+          >
+            {products.map((p, index) => (
+              <SwiperSlide key={index}>
+                <Product product={p} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </Box>
     </Box>
   );

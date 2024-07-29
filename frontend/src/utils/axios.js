@@ -1,14 +1,25 @@
 import axios from "axios";
-import Cookie from "universal-cookie";
+import Cookies from "universal-cookie";
 
-const cookie = new Cookie();
-let token = cookie.get("access_token");
-
+const cookies = new Cookies();
 const BASE_URL = "http://127.0.0.1:8000/api";
 
-export default axios.create({
+const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  // headers: {
-  //   Authorization: `Bearer ${token}`,
-  // },
 });
+
+// Add a request interceptor
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = cookies.get("access_token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

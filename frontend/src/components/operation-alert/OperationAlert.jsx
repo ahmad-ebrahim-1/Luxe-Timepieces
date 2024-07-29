@@ -24,12 +24,18 @@ const OperationAlert = ({
   }, [status, setOpen]);
 
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+    <Snackbar
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      autoHideDuration={3000}
+      // transitionDuration={0}
+      open={open}
+      onClose={handleClose}
+    >
       <Alert
         onClose={handleClose}
         severity={error ? "error" : "success"}
-        variant="outlined"
-        sx={{ width: "100%", bgcolor: "background.default" }}
+        variant="filled"
+        sx={{ color: "#FFF" }}
       >
         {error ? messageOnError : messageOnSuccess}
       </Alert>

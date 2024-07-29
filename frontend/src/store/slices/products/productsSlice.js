@@ -7,10 +7,8 @@ export const getProducts = createAsyncThunk(
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      console.log("getting products...");
       const res = await axios.get(`/products`);
       if (res.status === 200) {
-        console.log("SUCCESS, products fetched.");
         return {
           data: res.data,
         };
@@ -28,9 +26,17 @@ const productsSlice = createSlice({
     isLoading: false,
     error: null,
     products: [],
+    status: false,
+    operationLoading: false,
+    operationError: null,
   },
 
-  reducers: {},
+  reducers: {
+    productOperationCompleted: (state) => {
+      state.status = false;
+      state.error = null;
+    },
+  },
 
   extraReducers: (builder) => {
     // get products
@@ -52,3 +58,4 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
+export const { productOperationCompleted } = productsSlice.actions;
