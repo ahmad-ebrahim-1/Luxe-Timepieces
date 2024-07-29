@@ -35,4 +35,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/{productId}/basket', [BasketController::class, 'addToBasket']);
+    Route::get('users/Basket', [BasketController::class, 'getItems']);
 });

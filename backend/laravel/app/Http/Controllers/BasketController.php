@@ -28,4 +28,18 @@ class BasketController extends Controller
 
         return response()->json(['message' => 'Product added to basket', 'basketItem' => $basketItem], 201);
     }
+
+    public function getItems()
+    {
+
+        $basketItem = Basket::where('user_id', Auth::id())
+            ->with('product')
+            ->get()
+            ->map(function ($product) {
+                return $product->product;
+            });
+
+        return response()->json($basketItem, 200);
+    }
 }
+
