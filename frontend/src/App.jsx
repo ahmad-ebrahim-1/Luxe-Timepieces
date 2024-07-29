@@ -6,7 +6,7 @@ import {
   getAuthenticatedUser,
   authOperationCompleted,
 } from "./store/slices/auth/authSlice";
-import { getFavorites } from "./store/slices/products/productsSlice";
+import { getFavorites } from "./store/slices/favs/favsSlice";
 import Cookies from "universal-cookie";
 
 import Homepage from "./views/Homepage";
@@ -35,8 +35,10 @@ function App() {
   }, [user, token]);
 
   useEffect(() => {
-    if (token) getFavorites();
-  }, [dispatch]);
+    // fetch user favorites and baskete to update the UI
+    dispatch(getFavorites());
+    // fetching basket here...
+  }, [user]);
 
   const lightTheme = createTheme({
     palette: {

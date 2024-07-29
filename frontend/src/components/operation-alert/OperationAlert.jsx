@@ -26,8 +26,8 @@ const OperationAlert = ({
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      autoHideDuration={4000}
-      transitionDuration={0}
+      autoHideDuration={3000}
+      // transitionDuration={0}
       open={open}
       onClose={handleClose}
     >

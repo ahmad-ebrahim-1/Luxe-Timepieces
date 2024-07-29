@@ -4,10 +4,8 @@ import { ArrowBack } from "@mui/icons-material";
 import { Typography, Grid, Toolbar, IconButton } from "@mui/material";
 import Product from "../components/products/Product";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getFavorites,
-  productOperationCompleted,
-} from "../store/slices/products/productsSlice";
+import { getFavorites } from "../store/slices/favs/favsSlice";
+import { cartOperationCompleted } from "../store/slices/cart/cartSlice";
 import Loader from "../components/Loader";
 import Errorpage from "../components/Errorpage";
 import OperationAlert from "../components/operation-alert/OperationAlert";
@@ -15,9 +13,9 @@ import OperationAlert from "../components/operation-alert/OperationAlert";
 const Favs = () => {
   const navigate = useNavigate();
 
-  const { error, isLoading, favs, status, operationError } = useSelector(
-    (state) => state.products
-  );
+  const { error, isLoading, favs } = useSelector((state) => state.favs);
+  const { status: cartStatus, operationError: cartOperationError } =
+    useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,11 +29,11 @@ const Favs = () => {
   return (
     <>
       <OperationAlert
-        status={status}
-        error={operationError}
+        status={cartStatus}
+        error={cartOperationError}
         messageOnSuccess="The operation was completed successfuly"
         messageOnError="There was an error, please try again later"
-        completedAction={productOperationCompleted}
+        completedAction={cartOperationCompleted}
       />
 
       <Toolbar

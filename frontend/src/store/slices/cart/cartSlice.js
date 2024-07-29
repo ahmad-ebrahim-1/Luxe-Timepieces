@@ -7,11 +7,8 @@ export const addToCart = createAsyncThunk(
   async (prod_id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      console.log(`adding to cart...`);
       const res = await axios.post(`/products/${prod_id}/basket`);
-      console.log(res);
       if (res.status === 201) {
-        console.log("SUCCESS, item added.");
         return {
           data: res.data,
         };

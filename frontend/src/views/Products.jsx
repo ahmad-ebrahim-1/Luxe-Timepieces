@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  getProducts,
-  productOperationCompleted,
-} from "../store/slices/products/productsSlice";
+import { getProducts } from "../store/slices/products/productsSlice";
+import { cartOperationCompleted } from "../store/slices/cart/cartSlice";
 import { ArrowBack } from "@mui/icons-material";
 import {
   Typography,
@@ -25,9 +23,9 @@ const Products = () => {
   const [resultsType, setResultsType] = useState("basic");
   const navigate = useNavigate();
 
-  const { error, isLoading, products, status, operationError } = useSelector(
-    (state) => state.products
-  );
+  const { error, isLoading, products } = useSelector((state) => state.products);
+  const { status: cartStatus, operationError: cartOperationError } =
+    useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,11 +39,11 @@ const Products = () => {
   return (
     <>
       <OperationAlert
-        status={status}
-        error={operationError}
+        status={cartStatus}
+        error={cartOperationError}
         messageOnSuccess="The operation was completed successfuly"
         messageOnError="There was an error, please try again later"
-        completedAction={productOperationCompleted}
+        completedAction={cartOperationCompleted}
       />
 
       <Toolbar

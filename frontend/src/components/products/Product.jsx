@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Check, Favorite, ShoppingCartOutlined } from "@mui/icons-material";
-import { toggleFavorite } from "../../store/slices/products/productsSlice";
+import { toggleFavorite } from "../../store/slices/favs/favsSlice";
 
 const Product = ({ product }) => {
   const [addedToCart, setAddedToCart] = useState(false);
@@ -20,7 +20,7 @@ const Product = ({ product }) => {
 
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.cart);
-  const { favs } = useSelector((state) => state.products);
+  const { favs } = useSelector((state) => state.favs);
 
   // useEffect(() => {
   //   const checkIfAddedToCart = () => {
@@ -51,7 +51,7 @@ const Product = ({ product }) => {
   }, [favs]);
 
   const handleFavorite = () => {
-    dispatch(toggleFavorite(product));
+    dispatch(toggleFavorite({ ...product }));
   };
 
   const handleAddToCart = () => {

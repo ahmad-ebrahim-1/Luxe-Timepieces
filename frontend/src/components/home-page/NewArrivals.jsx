@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getProducts,
-  productOperationCompleted,
-} from "../../store/slices/products/productsSlice";
+import { getProducts } from "../../store/slices/products/productsSlice";
 
 import OperationAlert from "../operation-alert/OperationAlert";
 import Product from "../products/Product";
@@ -13,11 +10,12 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import "swiper/css";
 import "swiper/css/navigation";
+import { cartOperationCompleted } from "../../store/slices/cart/cartSlice";
 
 const NewArrivals = () => {
-  const { products, isLoading, error, status, operationError } = useSelector(
-    (state) => state.products
-  );
+  const { products, isLoading, error } = useSelector((state) => state.products);
+  const { status: cartStatus, operationError: cartOperationError } =
+    useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,11 +33,11 @@ const NewArrivals = () => {
       }}
     >
       <OperationAlert
-        status={status}
-        error={operationError}
+        status={cartStatus}
+        error={cartOperationError}
         messageOnSuccess="The operation was completed successfuly"
         messageOnError="There was an error, please try again later"
-        completedAction={productOperationCompleted}
+        completedAction={cartOperationCompleted}
       />
 
       <Typography

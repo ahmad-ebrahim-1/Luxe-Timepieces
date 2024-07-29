@@ -49,7 +49,12 @@ const UserDrawer = ({ isOpen, setOpen }) => {
               };
             }}
           >
-            <ListItemButton aria-label="favorites button">
+            <ListItemButton
+              aria-label="favorites button"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
               <ListItemIcon>{<Favorite />}</ListItemIcon>
               <ListItemText>Favorites</ListItemText>
             </ListItemButton>
@@ -60,6 +65,7 @@ const UserDrawer = ({ isOpen, setOpen }) => {
             aria-label="logout button"
             onClick={() => {
               dispatch(logout());
+              setOpen(false);
             }}
           >
             <ListItemIcon>{<Logout />}</ListItemIcon>
