@@ -30,10 +30,16 @@ const UserDrawer = ({ isOpen, setOpen }) => {
           paddingTop: "1rem",
         }}
       >
-        <Stack direction="row" spacing={2} alignItems="center" padding={2}>
-          <Avatar src="" alt="user profile image" />
-          <Typography variant="subtitle1">
-            {user && `${user.first_name} ${user.last_name}`}
+        <Stack direction="row" spacing={1} alignItems="center" padding={2}>
+          <Avatar />
+          <Typography variant="subtitle2">
+            {user &&
+              user.first_name &&
+              user.last_name &&
+              `${user.first_name} ${user.last_name}`}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "primary.main" }}>
+            {user && user.userType && user.userType}
           </Typography>
         </Stack>
         <Divider />

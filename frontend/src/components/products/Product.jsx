@@ -22,19 +22,19 @@ const Product = ({ product }) => {
   const { items } = useSelector((state) => state.cart);
   const { favs } = useSelector((state) => state.favs);
 
-  // useEffect(() => {
-  //   const checkIfAddedToCart = () => {
-  //     let added = items.find((item) => item.id === product.id);
+  useEffect(() => {
+    const checkIfAddedToCart = () => {
+      let added = items.find((item) => item.product.id === product.id);
 
-  //     if (added) {
-  //       setAddedToCart(true);
-  //     } else {
-  //       setAddedToCart(false);
-  //     }
-  //   };
+      if (added) {
+        setAddedToCart(true);
+      } else {
+        setAddedToCart(false);
+      }
+    };
 
-  //   checkIfAddedToCart();
-  // }, [items]);
+    checkIfAddedToCart();
+  }, [items]);
 
   useEffect(() => {
     const checkIfIsFavorite = () => {
@@ -55,7 +55,7 @@ const Product = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product.id));
+    dispatch(addToCart({ ...product }));
   };
 
   return (
@@ -70,8 +70,8 @@ const Product = ({ product }) => {
             objectFit: "cover",
             marginBottom: "1rem",
           }}
-          image={product.url}
-          title={product.title}
+          image={product && product.image_name && product.image_name}
+          title={product && product.title && product.title}
         />
         <CardContent
           sx={{
@@ -81,8 +81,12 @@ const Product = ({ product }) => {
             paddingBlock: "8px",
           }}
         >
-          <Typography variant="subtitle1">{product.title}</Typography>
-          <Typography variant="subtitle2">$ {product.price}</Typography>
+          <Typography variant="subtitle1">
+            {product && product.title && product.title}
+          </Typography>
+          <Typography variant="subtitle2">
+            {product && product.price && `$ ${product.price}`}
+          </Typography>
         </CardContent>
         <CardActions
           sx={{

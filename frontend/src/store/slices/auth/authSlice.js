@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import Cookies from "universal-cookie";
 import { clearFavs } from "../favs/favsSlice";
+import { clearItems } from "../cart/cartSlice";
 
 const cookie = new Cookies();
 
@@ -51,6 +52,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     if (res.status === 200) {
       cookie.remove("access_token");
       dispatch(clearFavs());
+      dispatch(clearItems());
       return {
         data: res.data,
       };

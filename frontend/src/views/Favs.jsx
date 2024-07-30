@@ -70,8 +70,8 @@ const Favs = () => {
           justifyContent: "center",
         }}
       >
-        {favs.map((product, index) => (
-          <Grid item key={index}>
+        {favs.map((product) => (
+          <Grid item key={product.id}>
             <Product product={product} />
           </Grid>
         ))}

@@ -1,12 +1,28 @@
-import { useSelector } from "react-redux";
-import { Box, Button, Modal, Stack, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import CartItem from "./CartItem";
-import { ArrowBack, Payment } from "@mui/icons-material";
+import { ArrowBack, Error, Payment } from "@mui/icons-material";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
+import { useEffect } from "react";
+import { getCartItems } from "../../store/slices/cart/cartSlice";
 
 const ShoppingCart = ({ isOpen, setIsOpen }) => {
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, isLoading, operationLoading, error, totalPrice } = useSelector(
+    (state) => state.cart
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCartItems());
+  }, [dispatch]);
 
   const style = {
     position: "absolute",
@@ -44,11 +60,26 @@ const ShoppingCart = ({ isOpen, setIsOpen }) => {
           >
             Shopping Cart
           </Typography>
-          <CartIcon />
+          {operationLoading ? <CircularProgress size="30px" /> : <CartIcon />}
         </Stack>
         <Stack spacing={1}>
-          {items.length > 0 ? (
-            items.map((item, index) => <CartItem item={item} key={index} />)
+          {error ? (
+            <Box component="div" sx={{ p: 6, textAlign: "center" }}>
+              <Error />
+              <Typography variant="h6">
+                Oops! There was an error getting cart items please try again
+                later
+              </Typography>
+            </Box>
+          ) : isLoading ? (
+            <Box
+              component="div"
+              sx={{ p: 6, display: "grid", placeItems: "center" }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : items.length > 0 ? (
+            items.map((item) => <CartItem item={item} key={item.basket_id} />)
           ) : (
             <Box
               component="div"
