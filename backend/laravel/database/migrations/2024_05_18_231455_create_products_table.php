@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('description');
             $table->string('image_name');
+            $table->enum('type', ['Smart', 'Basic']);
             $table->string('price');
             $table->string('sale_price');
                 // $table->unsignedBigInteger('categorie_id');
