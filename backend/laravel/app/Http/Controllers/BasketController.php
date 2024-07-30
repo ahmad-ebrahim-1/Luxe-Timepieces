@@ -42,11 +42,15 @@ class BasketController extends Controller
     {
 
         $basketItem = Basket::where('user_id', Auth::id())
-            ->with('product')
-            ->get()
-            ->map(function ($product) {
-                return $product->product;
-            });
+        ->with('product')
+        ->get()
+        ->map(function ($basketItem) {
+            return [
+                'basket_id' => $basketItem->id,
+                'quantity' => $basketItem->quantity,
+                'product' => $basketItem->product // Include product details if needed
+            ];
+        });
 
         return response()->json($basketItem, 200);
     }

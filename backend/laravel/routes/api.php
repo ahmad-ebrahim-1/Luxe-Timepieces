@@ -13,6 +13,7 @@ Route::controller(ProductController::class)->group(
         Route::get('/products', 'index');
          Route::get('/products/{id}', 'show');
          Route::post('/products', 'store');
+         
     }
 );
 
@@ -32,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/favorite/{productId}', [FavoriteController::class, 'toggleFavorite']);
     Route::get('users/favorites', [FavoriteController::class, 'getFavorites']);
+    
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/{productId}/basket', [BasketController::class, 'addToBasket']);
