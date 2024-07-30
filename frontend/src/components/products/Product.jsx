@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../store/slices/cart/cartSlice";
 import {
   Box,
@@ -21,6 +22,8 @@ const Product = ({ product }) => {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.cart);
   const { favs } = useSelector((state) => state.favs);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkIfAddedToCart = () => {
@@ -104,7 +107,17 @@ const Product = ({ product }) => {
               width: "100%",
             }}
           >
-            <Button variant="text" aria-label="Show more">
+            <Button
+              variant="text"
+              aria-label="Show more"
+              onClick={() => {
+                navigate("/products/details", {
+                  state: {
+                    product_id: product.id,
+                  },
+                });
+              }}
+            >
               Show details
             </Button>
             <IconButton
