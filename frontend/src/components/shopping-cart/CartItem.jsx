@@ -1,6 +1,11 @@
 import { useDispatch } from "react-redux";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { Add, Close, Remove } from "@mui/icons-material";
+import {
+  decreaseQuantity,
+  deleteCartItem,
+  increaseQuantity,
+} from "../../store/slices/cart/cartSlice";
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -20,7 +25,13 @@ const CartItem = ({ item }) => {
     >
       <Box
         component="img"
-        src={item.url}
+        src={
+          item &&
+          item.product &&
+          item.product.image_name &&
+          item.product.image_name
+        }
+        alt="product image"
         sx={{
           width: { xs: "50px", md: "75px" },
           height: { xs: "50px", md: "75px" },
@@ -31,16 +42,17 @@ const CartItem = ({ item }) => {
         variant="subtitle2"
         sx={{ fontSize: { xs: "caption.fontSize", sm: "subtitle2.fontSize" } }}
       >
-        {item.title} <br />{" "}
+        {item && item.product && item.product.title && item.product.title}
+        <br />
         <Box component="span" sx={{ color: "gray" }}>
-          id: #{item.id}
+          {item && item.product && item.product.id && `id: #${item.product.id}`}
         </Box>
       </Typography>
       <Typography
         variant="subtitle2"
         sx={{ fontSize: { xs: "caption.fontSize", sm: "subtitle2.fontSize" } }}
       >
-        {item.type}
+        {item && item.product && item.product.type && item.product.type}
       </Typography>
 
       <Stack direction="row" spacing={0.5} alignItems="center">
@@ -51,13 +63,23 @@ const CartItem = ({ item }) => {
             fontSize: { xs: "caption.fontSize", sm: "subtitle2.fontSize" },
           }}
         >
-          {item.quantity}
+          {item && item.quantity && item.quantity}
         </Typography>
         <Stack direction="column">
-          <IconButton onClick={() => {}} sx={{ p: 0.5 }}>
+          <IconButton
+            onClick={() => {
+              dispatch(increaseQuantity(item.basket_id));
+            }}
+            sx={{ p: 0.5 }}
+          >
             <Add fontSize="small" />
           </IconButton>
-          <IconButton onClick={() => {}} sx={{ p: 0.5 }}>
+          <IconButton
+            onClick={() => {
+              dispatch(decreaseQuantity(item.basket_id));
+            }}
+            sx={{ p: 0.5 }}
+          >
             <Remove fontSize="small" />
           </IconButton>
         </Stack>
@@ -67,10 +89,18 @@ const CartItem = ({ item }) => {
         variant="subtitle2"
         sx={{ fontSize: { xs: "caption.fontSize", sm: "subtitle2.fontSize" } }}
       >
-        $ {item.finalPrice}
+        ${" "}
+        {item &&
+          item.product &&
+          item.product.sale_price &&
+          item.product.sale_price}
       </Typography>
 
-      <IconButton onClick={() => {}}>
+      <IconButton
+        onClick={() => {
+          dispatch(deleteCartItem(item.basket_id));
+        }}
+      >
         <Close fontSize="small" />
       </IconButton>
     </Box>

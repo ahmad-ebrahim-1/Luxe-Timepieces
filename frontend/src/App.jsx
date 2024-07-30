@@ -18,6 +18,7 @@ import Footer from "./components/Footer";
 import Favs from "./views/Favs";
 import OperationAlert from "./components/operation-alert/OperationAlert";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
+import { getCartItems } from "./store/slices/cart/cartSlice";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -37,7 +38,7 @@ function App() {
   useEffect(() => {
     // fetch user favorites and baskete to update the UI
     dispatch(getFavorites());
-    // fetching basket here...
+    dispatch(getCartItems());
   }, [user]);
 
   const lightTheme = createTheme({

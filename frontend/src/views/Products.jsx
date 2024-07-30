@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../store/slices/products/productsSlice";
@@ -20,7 +20,7 @@ import Errorpage from "../components/Errorpage";
 import OperationAlert from "../components/operation-alert/OperationAlert";
 
 const Products = () => {
-  const [resultsType, setResultsType] = useState("basic");
+  const [resultsType, setResultsType] = useState("All");
   const navigate = useNavigate();
 
   const { error, isLoading, products } = useSelector((state) => state.products);
@@ -31,6 +31,12 @@ const Products = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  const memoizedProducts = useMemo(() => {
+    if (resultsType === "All") return products;
+
+    return products.filter((product) => product.type === resultsType);
+  }, [products, resultsType]);
 
   if (isLoading) return <Loader />;
 
@@ -79,8 +85,9 @@ const Products = () => {
             value={resultsType}
             onChange={(e) => setResultsType(e.target.value)}
           >
-            <MenuItem value="basic">Basic</MenuItem>
-            <MenuItem value="smart">Smart</MenuItem>
+            <MenuItem value="All">All</MenuItem>
+            <MenuItem value="Basic">Basic</MenuItem>
+            <MenuItem value="Smart">Smart</MenuItem>
           </Select>
         </FormControl>
       </Toolbar>
@@ -93,8 +100,8 @@ const Products = () => {
           justifyContent: "center",
         }}
       >
-        {products.map((product, index) => (
-          <Grid item key={index}>
+        {memoizedProducts.map((product) => (
+          <Grid item key={product.id}>
             <Product product={product} />
           </Grid>
         ))}
