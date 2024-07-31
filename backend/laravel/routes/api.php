@@ -13,7 +13,8 @@ Route::controller(ProductController::class)->group(
         Route::get('/products', 'index');
          Route::get('/products/{id}', 'show');
          Route::post('/products', 'store');
-        Route::post('/upload-product-image', [ProductController::class, 'uploadProductImage']);
+        Route::post('/products/{productId}/upload-image', [ProductController::class, 'uploadProductImage']);
+        Route::post('/products', [ProductController::class, 'create']);
     }
 );
 
