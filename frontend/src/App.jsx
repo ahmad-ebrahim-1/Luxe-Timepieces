@@ -19,6 +19,7 @@ import Favs from "./views/Favs";
 import OperationAlert from "./components/operation-alert/OperationAlert";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import { getCartItems } from "./store/slices/cart/cartSlice";
+import ProductDetails from "./views/ProductDetails";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -95,6 +96,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/favorites" element={<Favs />} />
+          <Route path="/products/details" element={<ProductDetails />} />
         </Routes>
         <Footer />
       </main>
