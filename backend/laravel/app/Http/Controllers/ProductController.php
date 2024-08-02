@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Favourite;
+use App\Models\Basket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -90,5 +91,83 @@ class ProductController extends Controller
          ]);
 
       return response()->json(['message' => 'Product created successfully', 'product' => $product], 201);
+   }
+   public function delete($id)
+   {
+      // Find the product by its ID
+      $product = Product::find($id);
+
+      // If the product doesn't exist, return a 404 response
+      if (!$product) {
+         return response()->json(['message' => 'Product not found'], 404);
+      }
+
+      // Optionally delete the image file if it exists
+      if ($product->image_name) {
+         // Extract the file path from the URL
+         $filePath = str_replace('/storage/', '', $product->image_name);
+         if (Storage::exists($filePath)) {
+            Storage::delete($filePath);
+         }
+      }
+      Basket::where('product_id', $id)->delete();
+      Favourite::where('product_id', $id)->delete();
+
+      // Delete the product from the database
+      $product->delete();
+
+      return response()->json(['message' => 'Product deleted successfully'], 200);
+   }
+   public function update(Request $request, $id)
+   {
+      // Validate the incoming request
+      $request->validate([
+         'title' => 'nullable|string|max:255',
+         'brand' => 'nullable|string|max:255',
+         'description' => 'nullable|string',
+         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+         'type' => 'nullable|in:Smart,Basic',
+         'price' => 'nullable|numeric',
+         'sale_price' => 'nullable|numeric',
+      ]);
+
+      // Find the product by its ID
+      $product = Product::find($id);
+
+      // If the product doesn't exist, return a 404 response
+      if (!$product) {
+         return response()->json(['message' => 'Product not found'], 404);
+      }
+
+      // Handle the image upload if present
+      if ($request->hasFile('image')) {
+         // Delete the old image file if it exists
+         if ($product->image_name) {
+            $oldImagePath = str_replace('/storage/', '', $product->image_name);
+            if (Storage::exists($oldImagePath)) {
+               Storage::delete($oldImagePath);
+            }
+         }
+
+         // Store the new image
+         $image = $request->file('image');
+         $imagePath = $image->store('product_images', 'public');
+         $imageUrl = Storage::url($imagePath);
+      } else {
+         $imageUrl = $product->image_name; // Keep the old image if no new one is provided
+      }
+
+      // Update the product
+      $product->update([
+         'title' => $request->input('title', $product->title),
+         'brand' => $request->input('brand', $product->brand),
+         'description' => $request->input('description', $product->description),
+         'image_name' => $imageUrl,
+         'type' => $request->input('type', $product->type),
+         'price' => $request->input('price', $product->price),
+         'sale_price' => $request->input('sale_price', $product->sale_price),
+      ]);
+
+      return response()->json(['message' => 'Product updated successfully', 'product' => $product], 200);
    }
 }
