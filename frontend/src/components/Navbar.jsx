@@ -28,6 +28,7 @@ import {
   HomeOutlined,
   WatchOutlined,
   AccountCircleOutlined,
+  Dashboard,
 } from "@mui/icons-material";
 
 import logo from "/logo.jpg";
@@ -129,7 +130,7 @@ export default function Navbar({ isDark, setIsDark }) {
             sx={{ display: { xs: "none", md: "flex" } }}
           >
             {links.map((link) => {
-              if (!link.isPrivate || (link.isPrivate && user === null))
+              if (!link.isPrivate || (link.isPrivate && user === null)) {
                 return (
                   <NavLink
                     to={link.path}
@@ -155,7 +156,32 @@ export default function Navbar({ isDark, setIsDark }) {
                     </Button>
                   </NavLink>
                 );
+              }
             })}
+            {user?.userType === "admin" && (
+              <NavLink
+                to="/admin-dashboard"
+                style={({ isActive }) => {
+                  return {
+                    borderBottom: isActive
+                      ? `${isDark ? "1px solid #fff" : "1px solid #000"}`
+                      : "",
+                  };
+                }}
+              >
+                <Button
+                  aria-label="Dashboard"
+                  variant="text"
+                  startIcon={<Dashboard />}
+                  sx={{
+                    color: `${isDark ? "#fff" : "#000"}`,
+                    ":hover": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
+                  }}
+                >
+                  <Typography variant="body2">Dashboard</Typography>
+                </Button>
+              </NavLink>
+            )}
           </Stack>
           <Stack direction="row" spacing={1}>
             {appBarBtns.map((btn) => {
@@ -224,6 +250,31 @@ export default function Navbar({ isDark, setIsDark }) {
                 </ListItem>
               );
           })}
+          {user?.userType === "admin" && (
+            <ListItem>
+              <NavLink
+                to="/admin-dashboard"
+                style={({ isActive }) => {
+                  return {
+                    width: "100%",
+                    textDecoration: "none",
+                    color: "inherit",
+                    backgroundColor: isActive ? "rgba(0, 0, 0, .1)" : "",
+                  };
+                }}
+              >
+                <ListItemButton
+                  aria-label="admin-dashboard"
+                  onClick={() => setDrawerIsVisible(false)}
+                >
+                  <ListItemIcon>
+                    <Dashboard />
+                  </ListItemIcon>
+                  <ListItemText>{"dashboard".toUpperCase()}</ListItemText>
+                </ListItemButton>
+              </NavLink>
+            </ListItem>
+          )}
         </List>
       </Drawer>
 

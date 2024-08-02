@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import BackdropLoading from "../components/backdrop-loading/BackdropLoading";
 
 function getLocalDate(date) {
   const localeDate = new Date(date);
@@ -52,8 +53,10 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductDetails(product_id));
+    if (product_id) dispatch(getProductDetails(product_id));
   }, [dispatch, product_id]);
+
+  console.log(productDetails);
 
   useEffect(() => {
     let added;
@@ -65,7 +68,7 @@ const ProductDetails = () => {
     } else {
       setInCart(false);
     }
-  }, [items, productDetails.id]);
+  }, [items, productDetails?.id]);
 
   useEffect(() => {
     let added;
@@ -77,7 +80,7 @@ const ProductDetails = () => {
     } else {
       setIsFav(false);
     }
-  }, [favs, productDetails.id]);
+  }, [favs, productDetails?.id]);
 
   if (isLoading) return <Loader />;
 
@@ -102,19 +105,14 @@ const ProductDetails = () => {
         completedAction={cartOperationCompleted}
       />
 
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={cartLoading || operationLoading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+      <BackdropLoading isLoading={cartLoading || operationLoading} />
 
       <Box
         component="img"
         src={
           productDetails &&
           productDetails.image_name &&
-          productDetails.image_name
+          "http://127.0.0.1:8000" + productDetails.image_name
         }
         alt="product image"
         sx={{
@@ -180,7 +178,7 @@ const ProductDetails = () => {
         >
           {isFav ? "Remove from Favorites" : "Add to Favorites"}
         </Button>
-        {productDetails && productDetails.created_at && (
+        {/* {productDetails && productDetails.created_at && (
           <Box
             component="div"
             sx={{
@@ -200,7 +198,7 @@ const ProductDetails = () => {
               {getLocalDate(productDetails.created_at)}
             </Typography>
           </Box>
-        )}
+        )} */}
       </Box>
     </Box>
   );

@@ -73,7 +73,11 @@ const Product = ({ product }) => {
             objectFit: "cover",
             marginBottom: "1rem",
           }}
-          image={product && product.image_name && "http://127.0.0.1:8000"+product.image_name}
+          image={
+            product &&
+            product.image_name &&
+            "http://127.0.0.1:8000" + product.image_name
+          }
           title={product && product.title && product.title}
         />
         <CardContent

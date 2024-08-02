@@ -1,13 +1,14 @@
 import { Box, Stack, Typography } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
 
-const Errorpage = ({ message }) => {
+const Errorpage = ({ message, normalHeight, styles }) => {
   return (
     <Box
       sx={{
-        minHeight: "100dvh",
+        minHeight: normalHeight ? "" : "100dvh",
         display: "grid",
         placeItems: "center",
+        ...styles,
       }}
     >
       <Stack

@@ -37,6 +37,60 @@ export const getProductDetails = createAsyncThunk(
   }
 );
 
+// add product
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async (data, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await axios.post(`/products`, data);
+      if (res.status === 201) {
+        return {
+          data: res.data,
+        };
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+// edit product
+export const editProduct = createAsyncThunk(
+  "products/editProduct",
+  async (params, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await axios.patch(`/products/${params.id}`, params.data);
+      if (res.status === 200) {
+        return {
+          data: res.data,
+        };
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+// delete product
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (id, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await axios.delete(`/products/${id}`);
+      if (res.status === 200) {
+        return {
+          prod_id: id,
+        };
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
 
@@ -87,6 +141,58 @@ const productsSlice = createSlice({
       .addCase(getProductDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      });
+    // add product
+    builder
+      .addCase(addProduct.pending, (state) => {
+        state.operationError = null;
+        state.operationLoading = true;
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.operationError = null;
+        state.operationLoading = false;
+        state.status = true;
+      })
+      .addCase(addProduct.rejected, (state, action) => {
+        state.operationLoading = false;
+        state.operationError = action.payload;
+        state.status = true;
+      });
+    // edit product
+    builder
+      .addCase(editProduct.pending, (state) => {
+        state.operationError = null;
+        state.operationLoading = true;
+      })
+      .addCase(editProduct.fulfilled, (state, action) => {
+        state.operationError = null;
+        state.operationLoading = false;
+        state.status = true;
+      })
+      .addCase(editProduct.rejected, (state, action) => {
+        state.operationLoading = false;
+        state.operationError = action.payload;
+        state.status = true;
+      });
+    // delete product
+    builder
+      .addCase(deleteProduct.pending, (state) => {
+        state.operationError = null;
+        state.operationLoading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.operationError = null;
+        state.operationLoading = false;
+        state.status = true;
+
+        state.products = state.products.filter(
+          (product) => product.id !== action.payload.prod_id
+        );
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.operationLoading = false;
+        state.operationError = action.payload;
+        state.status = true;
       });
   },
 });

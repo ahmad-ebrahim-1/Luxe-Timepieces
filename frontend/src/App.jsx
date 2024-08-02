@@ -17,9 +17,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Favs from "./views/Favs";
 import OperationAlert from "./components/operation-alert/OperationAlert";
-import ProtectedRoute from "./components/routes/ProtectedRoute";
 import { getCartItems } from "./store/slices/cart/cartSlice";
 import ProductDetails from "./views/ProductDetails";
+import Admindashboard from "./views/Admindashboard";
+import AddProduct from "./views/products-operations/AddProduct";
+import EditProduct from "./views/products-operations/EditProduct";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -66,7 +68,7 @@ function App() {
         main: "#AEE6E6",
       },
       secondary: {
-        main: "#454545",
+        main: "#222222",
       },
       background: {
         default: "#292929",
@@ -97,6 +99,12 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/favorites" element={<Favs />} />
           <Route path="/products/details" element={<ProductDetails />} />
+          <Route path="/admin-dashboard" element={<Admindashboard />} />
+          <Route path="/admin-dashboard/add-product" element={<AddProduct />} />
+          <Route
+            path="/admin-dashboard/edit-product"
+            element={<EditProduct />}
+          />
         </Routes>
         <Footer />
       </main>
