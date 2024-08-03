@@ -8,7 +8,7 @@ use App\Http\Controllers\BasketController;
 use Illuminate\Http\Request;
 
 Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
-Route::middleware('auth:api')->get('/user', [UserController::class, 'getUser']);
+Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
 
 Route::middleware('auth:sanctum')->delete('/users/{id}', [UserController::class, 'destroy']);
 Route::middleware('auth:sanctum')->put('/users/{id}/type', [UserController::class, 'updateUserType']);

@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function getUser(Request $request)
     {
-        return response()->json($request->users());
+        return response()->json(Auth::user());
     }
 
     public function index()
