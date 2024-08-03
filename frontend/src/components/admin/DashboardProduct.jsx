@@ -42,9 +42,13 @@ const DashboardProduct = ({ product }) => {
       />
       <Box
         component="img"
-        src={product && product.image_name && product.image_name}
+        src={
+          product &&
+          product.image_name &&
+          "http://127.0.0.1:8000" + product.image_name
+        }
         alt="product image"
-        sx={{ width: "200px" }}
+        sx={{ width: "125px", height: "125px", objectFit: "cover" }}
       />
       <Box
         component="div"
