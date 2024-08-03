@@ -32,7 +32,7 @@ const AddProduct = () => {
     type: "",
     price: null,
     description: "",
-    image: null,
+    image_name: null,
   };
 
   const submitHandler = (values) => {

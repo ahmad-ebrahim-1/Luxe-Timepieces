@@ -61,7 +61,8 @@ export const editProduct = createAsyncThunk(
   async (params, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.patch(`/products/${params.id}`, params.data);
+      const res = await axios.put(`/products/${params.id}`, params.data);
+      console.log(res);
       if (res.status === 200) {
         return {
           data: res.data,

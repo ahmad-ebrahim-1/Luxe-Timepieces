@@ -46,7 +46,7 @@ const ImageUploader = ({ formikProps, defaultImage }) => {
             imageInput.current.files.length > 0
           ) {
             const file = imageInput.current.files[0];
-            formikProps.setFieldValue("image", file);
+            formikProps.setFieldValue("image_name", file);
 
             if (
               event.target.files &&

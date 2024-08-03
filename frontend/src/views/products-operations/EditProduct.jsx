@@ -51,19 +51,16 @@ const EditProduct = () => {
       description: productDetails?.description
         ? productDetails.description
         : "",
-      image: productDetails?.image_name ? productDetails.image_name : null,
+      image_name: productDetails?.image_name ? productDetails.image_name : null,
     };
 
   const submitHandler = (values) => {
     values = { ...values, sale_price: values.price };
 
-    const formData = new FormData();
-    for (let key in values) {
-      formData.append(key, values[key]);
-    }
-    console.log(formData);
+    const data = JSON.stringify(values);
+    console.log(data);
 
-    dispatch(editProduct({ id: productDetails.id, data: formData }));
+    dispatch(editProduct({ id: productDetails.id, data: data }));
   };
 
   if (isLoading) return <Loader />;

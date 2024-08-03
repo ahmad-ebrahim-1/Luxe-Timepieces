@@ -19,7 +19,7 @@ const productSchema = yup.object().shape({
   type: yup.string().required("Product type is required"),
   price: yup.number().required("Product price is required"),
   description: yup.string().required("Product description is required"),
-  image: yup.mixed().nullable(),
+  image_name: yup.mixed().nullable(),
 });
 
 export const ProductOperation = ({ initialValues, submitHandler, op }) => {
@@ -144,7 +144,7 @@ export const ProductOperation = ({ initialValues, submitHandler, op }) => {
 
               <ImageUploader
                 formikProps={props}
-                defaultImage={props.values?.image}
+                defaultImage={props.values?.image_name}
               />
 
               <Button variant="contained" type="submit" fullWidth size="large">
