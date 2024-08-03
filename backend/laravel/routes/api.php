@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Api\AuthController;
@@ -7,8 +7,11 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BasketController;
 use Illuminate\Http\Request;
 
+Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
 Route::middleware('auth:api')->get('/user', [UserController::class, 'getUser']);
 
+Route::middleware('auth:sanctum')->delete('/users/{id}', [UserController::class, 'destroy']);
+Route::middleware('auth:sanctum')->put('/users/{id}/type', [UserController::class, 'updateUserType']);
 
 Route::controller(ProductController::class)->group(
     function () {
@@ -41,6 +44,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/basket/increase/{basketId}', [BasketController::class, 'increaseQuantity']);
      Route::patch('/basket/decrease/{basketId}', [BasketController::class, 'decreaseQuantity']);
 });
-Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('auth:api');
-Route::put('/users/{id}/type', [UserController::class, 'updateUserType'])->middleware('auth:api');
