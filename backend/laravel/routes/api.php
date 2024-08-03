@@ -16,7 +16,7 @@ Route::controller(ProductController::class)->group(
         Route::get('/products/{id}', [ProductController::class, 'show']); // Get product by ID
         Route::post('/products', [ProductController::class, 'create']); // Create a new product
         Route::delete('/products/{id}', [ProductController::class, 'delete']); // Delete a product by ID
-        Route::patch('/products/{id}', [ProductController::class, 'update']); // Update a product by ID
+        Route::put('/products/{id}', [ProductController::class, 'update']); // Update a product by ID
     }
 );
 
