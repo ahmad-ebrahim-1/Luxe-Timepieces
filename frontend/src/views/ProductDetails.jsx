@@ -11,15 +11,9 @@ import { toggleFavorite } from "../store/slices/favs/favsSlice";
 import Loader from "../components/Loader";
 import Errorpage from "../components/Errorpage";
 import OperationAlert from "../components/operation-alert/OperationAlert";
-import {
-  Backdrop,
-  Box,
-  Button,
-  CircularProgress,
-  Typography,
-} from "@mui/material";
-import DateRangeIcon from "@mui/icons-material/DateRange";
+import { Box, Button, Typography } from "@mui/material";
 import BackdropLoading from "../components/backdrop-loading/BackdropLoading";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 
 function getLocalDate(date) {
   const localeDate = new Date(date);
@@ -131,7 +125,7 @@ const ProductDetails = () => {
           maxWidth: { xs: "100%", sm: "400px" },
         }}
       >
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="h4" fontWeight="bold">
           {productDetails && productDetails.title && productDetails.title}
         </Typography>
         <Typography variant="h6" sx={{ color: "primary.main" }}>

@@ -29,12 +29,13 @@ const CartItem = ({ item }) => {
           item &&
           item.product &&
           item.product.image_name &&
-          item.product.image_name
+          "http://127.0.0.1:8000" + item.product.image_name
         }
         alt="product image"
         sx={{
           width: { xs: "50px", md: "75px" },
           height: { xs: "50px", md: "75px" },
+          objectFit: "cover",
         }}
       />
 

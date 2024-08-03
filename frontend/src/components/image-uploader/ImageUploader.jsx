@@ -6,7 +6,9 @@ import { Box, IconButton, Typography } from "@mui/material";
 const ImageUploader = ({ formikProps, defaultImage }) => {
   const imageInput = useRef(null);
 
-  const [uploadedImage, setUploadedImage] = useState(defaultImage); // add base storage url
+  const [uploadedImage, setUploadedImage] = useState(
+    defaultImage ? "http://127.0.0.1:8000" + defaultImage : null
+  );
   const [imageName, setImageName] = useState("");
 
   const handleImageRemove = (props) => {
