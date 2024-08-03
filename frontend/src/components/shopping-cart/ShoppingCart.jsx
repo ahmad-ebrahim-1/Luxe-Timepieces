@@ -21,8 +21,8 @@ const ShoppingCart = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCartItems());
-  }, [dispatch]);
+    if (isOpen) dispatch(getCartItems());
+  }, [dispatch, isOpen]);
 
   const style = {
     position: "absolute",

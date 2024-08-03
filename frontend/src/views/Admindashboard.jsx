@@ -5,7 +5,10 @@ import {
   getProducts,
   productOperationCompleted,
 } from "../store/slices/products/productsSlice";
-import { getUsers } from "../store/slices/users/usersSlice";
+import {
+  getUsers,
+  usersOperationCompleted,
+} from "../store/slices/users/usersSlice";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Loader from "../components/Loader";
 import Errorpage from "../components/Errorpage";
@@ -30,6 +33,9 @@ const Admindashboard = () => {
     users,
     isLoading: usersLoading,
     error: usersError,
+    status: userStatus,
+    operationError: userOperationError,
+    operationLoading: userOperationLoading,
   } = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
@@ -58,6 +64,13 @@ const Admindashboard = () => {
         messageOnSuccess="The product deleted successfuly"
         messageOnError="Oops! There was an error please try again later"
         completedAction={productOperationCompleted}
+      />
+      <OperationAlert
+        status={userStatus}
+        error={userOperationError}
+        messageOnSuccess="The user deleted successfuly"
+        messageOnError="Oops! There was an error please try again later"
+        completedAction={usersOperationCompleted}
       />
 
       <Typography variant="h5" sx={{ textAlign: "center" }}>

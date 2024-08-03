@@ -44,7 +44,7 @@ class UserController extends Controller
 
         // Check if the authenticated user has permission to delete the user
         // Adjust this condition as per your authorization logic
-        if ($authenticatedUser->id !== $user->id) {
+        if ($authenticatedUser->userType !== "admin") {
             return response()->json(['message' => 'Forbidden'], 403);
         }
 

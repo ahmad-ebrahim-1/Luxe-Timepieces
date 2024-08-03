@@ -66,7 +66,7 @@ class ProductController extends Controller
          'title' => 'required|string|max:255',
          'brand' => 'required|string|max:255',
          'description' => 'required|string',
-         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+         'image_name' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
          'type' => 'required|in:Smart,Basic',
          'price' => 'required|numeric',
          'sale_price' => 'required|numeric',
@@ -74,8 +74,8 @@ class ProductController extends Controller
 
       // Handle the image upload if present
       $imagePath = null;
-      if ($request->hasFile('image')) {
-         $image = $request->file('image');
+      if ($request->hasFile('image_name')) {
+         $image = $request->file('image_name');
          $imagePath = $image->store('product_images', 'public');
       }
 

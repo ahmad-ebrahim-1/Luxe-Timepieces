@@ -1,14 +1,21 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DeleteModal from "../delete-modal/DeleteModal";
 import { Delete, Edit } from "@mui/icons-material";
 import PermissionModal from "../user-permission-modal/PermissionModal";
+import { deleteUser } from "../../store/slices/users/usersSlice";
 
 const DashboardUser = ({ user }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [permissionModalOpen, setPermissionModalOpen] = useState(false);
 
-  const handleDelete = () => {};
+  const { operationLoading } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteUser(user.id));
+  };
 
   return (
     <Box
@@ -29,6 +36,7 @@ const DashboardUser = ({ user }) => {
         setIsOpen={setDeleteModalOpen}
         elementToDelete={user.first_name + " " + user.last_name}
         deleteAction={handleDelete}
+        isLoading={operationLoading}
       />
       <PermissionModal
         isOpen={permissionModalOpen}

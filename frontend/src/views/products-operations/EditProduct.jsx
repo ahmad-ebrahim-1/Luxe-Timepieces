@@ -58,7 +58,6 @@ const EditProduct = () => {
     values = { ...values, sale_price: values.price };
 
     const data = values;
-    console.log(data);
 
     dispatch(editProduct({ id: productDetails.id, data: data }));
   };
