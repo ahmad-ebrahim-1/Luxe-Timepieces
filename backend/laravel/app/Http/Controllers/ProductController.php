@@ -158,6 +158,7 @@ class ProductController extends Controller
       }
 
       // Update the product
+      
       $product->update([
          'title' => $request->input('title', $product->title),
          'brand' => $request->input('brand', $product->brand),
@@ -168,6 +169,10 @@ class ProductController extends Controller
          'sale_price' => $request->input('sale_price', $product->sale_price),
       ]);
 
-      return response()->json(['message' => 'Product updated successfully', 'product' => $product], 200);
+      if ($product->wasChanged()) {
+         return response()->json(['message' => 'Product updated successfully', 'product' => $product], 200);
+      } else {
+         return response()->json(['message' => 'No changes made to the product'], 200);
+      }
    }
 }
