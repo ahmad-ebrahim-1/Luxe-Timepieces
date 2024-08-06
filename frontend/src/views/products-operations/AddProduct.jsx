@@ -36,13 +36,10 @@ const AddProduct = () => {
   };
 
   const submitHandler = (values) => {
-    values = { ...values, sale_price: values.price };
-
     const formData = new FormData();
     for (let key in values) {
       formData.append(key, values[key]);
     }
-    console.log(formData);
 
     dispatch(addProduct(formData));
   };

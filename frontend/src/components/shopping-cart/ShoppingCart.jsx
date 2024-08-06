@@ -128,14 +128,14 @@ const ShoppingCart = ({ isOpen, setIsOpen }) => {
             Total price: $ {totalPrice}
           </Typography>
 
-          <Button
+          {/* <Button
             sx={{ width: { xs: "100%", sm: "fit-content" } }}
             disabled={!items.length}
             variant="contained"
             endIcon={<Payment />}
           >
             Checkout
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </Modal>

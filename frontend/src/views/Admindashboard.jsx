@@ -68,7 +68,7 @@ const Admindashboard = () => {
       <OperationAlert
         status={userStatus}
         error={userOperationError}
-        messageOnSuccess="The user deleted successfuly"
+        messageOnSuccess="The operation was completed successfuly"
         messageOnError="Oops! There was an error please try again later"
         completedAction={usersOperationCompleted}
       />

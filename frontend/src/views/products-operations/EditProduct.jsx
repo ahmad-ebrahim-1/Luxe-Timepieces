@@ -55,8 +55,6 @@ const EditProduct = () => {
     };
 
   const submitHandler = (values) => {
-    values = { ...values, sale_price: values.price };
-
     const data = values;
 
     dispatch(editProduct({ id: productDetails.id, data: data }));

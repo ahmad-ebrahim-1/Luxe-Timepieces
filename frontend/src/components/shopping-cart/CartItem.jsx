@@ -90,11 +90,7 @@ const CartItem = ({ item }) => {
         variant="subtitle2"
         sx={{ fontSize: { xs: "caption.fontSize", sm: "subtitle2.fontSize" } }}
       >
-        ${" "}
-        {item &&
-          item.product &&
-          item.product.sale_price &&
-          item.product.sale_price}
+        $ {item && item.product && item.product.price && item.product.price}
       </Typography>
 
       <IconButton

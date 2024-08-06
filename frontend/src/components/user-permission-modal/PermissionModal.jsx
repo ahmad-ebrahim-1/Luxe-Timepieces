@@ -10,6 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { changeUserType } from "../../store/slices/users/usersSlice";
 
 const style = {
   position: "absolute",
@@ -27,11 +29,17 @@ const style = {
 const PermissionModal = ({ isOpen, setIsOpen, user }) => {
   const [userPermission, setUserPermission] = React.useState(user.userType);
 
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
     setUserPermission(event.target.value);
   };
 
-  const handleChangePermission = () => {};
+  const handleChangePermission = () => {
+    dispatch(
+      changeUserType({ id: user.id, data: { userType: userPermission } })
+    );
+  };
 
   return (
     <Modal open={isOpen} onClose={() => setIsOpen(false)}>
