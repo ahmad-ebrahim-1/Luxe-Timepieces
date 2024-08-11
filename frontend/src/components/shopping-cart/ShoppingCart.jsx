@@ -21,8 +21,8 @@ const ShoppingCart = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCartItems());
-  }, [dispatch]);
+    if (isOpen) dispatch(getCartItems());
+  }, [dispatch, isOpen]);
 
   const style = {
     position: "absolute",
@@ -128,14 +128,14 @@ const ShoppingCart = ({ isOpen, setIsOpen }) => {
             Total price: $ {totalPrice}
           </Typography>
 
-          <Button
+          {/* <Button
             sx={{ width: { xs: "100%", sm: "fit-content" } }}
             disabled={!items.length}
             variant="contained"
             endIcon={<Payment />}
           >
             Checkout
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </Modal>

@@ -81,9 +81,6 @@ const DashboardProduct = ({ product }) => {
         <Typography variant="subtitle1">
           Price: ${product && product.price && product.price}
         </Typography>
-        <Typography variant="subtitle1">
-          Sale Price: ${product && product.sale_price && product.sale_price}
-        </Typography>
         <Typography variant="body2">
           Watch type: {product && product.type && product.type}
         </Typography>

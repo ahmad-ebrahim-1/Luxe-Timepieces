@@ -50,8 +50,6 @@ const ProductDetails = () => {
     if (product_id) dispatch(getProductDetails(product_id));
   }, [dispatch, product_id]);
 
-  console.log(productDetails);
-
   useEffect(() => {
     let added;
     if (productDetails && productDetails.id)

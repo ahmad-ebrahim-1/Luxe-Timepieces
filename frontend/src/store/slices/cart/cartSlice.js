@@ -96,7 +96,7 @@ export const decreaseQuantity = createAsyncThunk(
 function calculateTotalPrice(items) {
   let totalPrice = 0;
   items.forEach((item) => {
-    totalPrice += parseFloat(item.product.sale_price) * parseInt(item.quantity);
+    totalPrice += parseFloat(item.product.price) * parseInt(item.quantity);
   });
 
   return totalPrice.toFixed(2);

@@ -32,18 +32,6 @@ function App() {
   const cookie = new Cookies();
   const token = cookie.get("access_token");
 
-  useEffect(() => {
-    if (!user && token) {
-      dispatch(getAuthenticatedUser());
-    }
-  }, [user, token]);
-
-  useEffect(() => {
-    // fetch user favorites and baskete to update the UI
-    dispatch(getFavorites());
-    dispatch(getCartItems());
-  }, [user]);
-
   const lightTheme = createTheme({
     palette: {
       mode: "light",
@@ -78,6 +66,19 @@ function App() {
       fontFamily: "'Outfit', 'Roboto'",
     },
   });
+
+  useEffect(() => {
+    if (!user && token) {
+      dispatch(getAuthenticatedUser());
+    }
+  }, [user, token]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getFavorites());
+      dispatch(getCartItems());
+    }
+  }, [user]);
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>

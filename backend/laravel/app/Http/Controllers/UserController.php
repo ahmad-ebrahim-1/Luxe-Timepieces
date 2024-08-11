@@ -31,7 +31,14 @@ class UserController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
+<<<<<<< HEAD
         if ($authenticatedUser->id !== $user->id) {
+=======
+
+        // Check if the authenticated user has permission to delete the user
+        // Adjust this condition as per your authorization logic
+        if ($authenticatedUser->userType !== "admin") {
+>>>>>>> e5e1c6c8d12e1d0a22d365650b0ee1bebaf8a534
             return response()->json(['message' => 'Forbidden'], 403);
         }
         $user->delete();
