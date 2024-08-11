@@ -9,17 +9,16 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
-
 Route::middleware('auth:sanctum')->delete('/users/{id}', [UserController::class, 'destroy']);
 Route::middleware('auth:sanctum')->put('/users/{id}/type', [UserController::class, 'updateUserType']);
 
 Route::controller(ProductController::class)->group(
     function () {
-        Route::get('/products', [ProductController::class, 'index']); // Get all products
-        Route::get('/products/{id}', [ProductController::class, 'show']); // Get product by ID
-        Route::post('/products', [ProductController::class, 'create']); // Create a new product
-        Route::delete('/products/{id}', [ProductController::class, 'delete']); // Delete a product by ID
-        Route::put('/products/{id}', [ProductController::class, 'update']); // Update a product by ID
+        Route::get('/products', [ProductController::class, 'index']); 
+        Route::get('/products/{id}', [ProductController::class, 'show']);
+        Route::post('/products', [ProductController::class, 'create']);
+        Route::delete('/products/{id}', [ProductController::class, 'delete']);
+        Route::put('/products/{id}', [ProductController::class, 'update']); 
     }
 );
 

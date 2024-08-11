@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('image_name');
             $table->enum('type', ['Smart', 'Basic']);
             $table->float('price');
-            $table->float('sale_price');
                 // $table->unsignedBigInteger('categorie_id');
             //$table->foreign('categorie_id')->references('id')->on('categorie');
             $table->timestamps();

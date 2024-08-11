@@ -20,11 +20,9 @@ class FavoriteController extends Controller
             ->first();
 
         if ($favorite) {
-            // If the favorite exists, delete it
             $favorite->delete();
             return response()->json(['message' => 'Product removed from favorite'], 200);
         } else {
-            // If the favorite does not exist, create it
             $product = Product::find($productId);
 
             if (!$product) {

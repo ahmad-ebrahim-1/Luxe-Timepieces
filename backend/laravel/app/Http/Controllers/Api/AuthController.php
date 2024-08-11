@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
-
-
 
 class AuthController extends Controller
 {
@@ -53,7 +48,6 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        //authenticate the user
         $credentials    =   $request->only('email', 'password');
 
         if (!Auth::attempt($credentials)) {
@@ -61,7 +55,6 @@ class AuthController extends Controller
                 'message' => 'User not found'
             ], 401);
         }
-        //generate a token or “user not found”
         $user   = User::where('email', $request->email)->firstOrFail();
         $token  = $user->createToken('auth_token')->plainTextToken;
 

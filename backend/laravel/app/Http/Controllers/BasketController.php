@@ -1,5 +1,5 @@
 <?php
-// app/Http/Controllers/BasketController.php
+
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
@@ -26,7 +26,6 @@ class BasketController extends Controller
             ->first();
 
         if ($basketItem) {
-            // Item already exists in the basket
             return response()->json(['message' => 'Product already in basket'], 400);
         }
 
@@ -48,7 +47,7 @@ class BasketController extends Controller
             return [
                 'basket_id' => $basketItem->id,
                 'quantity' => $basketItem->quantity,
-                'product' => $basketItem->product // Include product details if needed
+                'product' => $basketItem->product 
             ];
         });
 
