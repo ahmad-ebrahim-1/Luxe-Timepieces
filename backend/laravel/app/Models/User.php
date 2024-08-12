@@ -32,4 +32,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function basket()
+    {
+        return $this->hasMany(Basket::class);
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
 }

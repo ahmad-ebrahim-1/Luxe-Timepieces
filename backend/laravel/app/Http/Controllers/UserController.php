@@ -35,6 +35,8 @@ class UserController extends Controller
         if ($authenticatedUser->userType !== "admin") {
             return response()->json(['message' => 'Forbidden'], 403);
         }
+        $user->basket()->delete();
+        $user->favourites()->delete();
         $user->delete();
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
